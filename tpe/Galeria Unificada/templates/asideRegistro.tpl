@@ -1,27 +1,4 @@
-
-
-    <section class="content">
-        <nav class="asidebar" id="js-asidebar">
-            <!-- sacar el hidden despues de programar el js -->
-            <ul class="aside_items">
-                <li>
-                    <button id="js-aboutBtn">
-                        About us
-                    </button>
-                </li>
-                <li>
-                    <button id="js-contactBtn">
-                        Contact
-                    </button>
-                </li>
-                <li>
-                    <button id="js-adminBtn">
-                        Admin
-                    </button>
-                </li>
-            </ul>
-        </nav>
-        <nav class="register_aside" id="js-aside_register">
+       <nav class="register_aside" id="js-aside_register">
             <!-- sacar el hidden despues de programar el js -->
             <section class="register_welcome">
                 <h2>Bienvenido a CL Gallery!</h2>
@@ -49,14 +26,3 @@
                 <span class="notificator" id="error_displayer"></span>
             </form>
         </nav>
-        <section class="container" id="js-container">
-
-            <!-- aca van todos los htmls -->
-
-
-        </section>
-    </section>
-    <script src="js/asides.js"></script>
-</body>
-
-</html>

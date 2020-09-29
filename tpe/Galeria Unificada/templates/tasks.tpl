@@ -1,4 +1,4 @@
-{include file="header.tpl"}
+{* {include file="header.tpl"}
 <div class="container">
 
           <ul class="list-group">
@@ -16,4 +16,4 @@
 
 {include file="createTask.tpl"}      
 
-{include file="footer.tpl"}
+{include file="footer.tpl"} *}

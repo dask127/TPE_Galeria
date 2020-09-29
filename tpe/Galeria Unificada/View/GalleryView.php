@@ -1,6 +1,6 @@
 <?php
 
-// require_once "./libs/smarty/Smarty.class.php";
+require_once "./libs/smarty/Smarty.class.php";
 
 class GalleryView{
 
@@ -10,16 +10,16 @@ class GalleryView{
     
 
     function __construct(){
-        // $this->title = "Lista de Tareas";
+        $this->title = "Galeria de Arte";
     }
 
     function ShowHome($tasks){
-        print_r($tasks);
-        // $smarty = new Smarty();
-        // $smarty->assign('titulo_s', $this->title);
+        // print_r($tasks);
+        $smarty = new Smarty();
+        $smarty->assign('titulo_s', $this->title);
         // $smarty->assign('tareas_s', $tasks);
       
-        // $smarty->display('templates/tasks.tpl'); // muestro el template 
+        $smarty->display('templates/main.tpl'); // muestro el template 
     }
 
     function ShowEditTask($task){
