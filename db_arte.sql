@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.5
+-- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 29-09-2020 a las 01:47:53
--- Versión del servidor: 10.1.39-MariaDB
--- Versión de PHP: 7.3.5
+-- Tiempo de generación: 29-09-2020 a las 05:39:11
+-- Versión del servidor: 10.4.11-MariaDB
+-- Versión de PHP: 7.4.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -33,6 +32,15 @@ CREATE TABLE `categoria` (
   `nombre` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Volcado de datos para la tabla `categoria`
+--
+
+INSERT INTO `categoria` (`id`, `nombre`) VALUES
+(1, 'Pintura'),
+(2, 'Dibujo'),
+(3, 'Escultura');
+
 -- --------------------------------------------------------
 
 --
@@ -46,6 +54,13 @@ CREATE TABLE `obra` (
   `anio` date NOT NULL,
   `id_categoria` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `obra`
+--
+
+INSERT INTO `obra` (`id`, `nombre`, `autor`, `anio`, `id_categoria`) VALUES
+(2, 'La Gioconda', 'Leonardo Da Vinci', '1503-01-01', 1);
 
 -- --------------------------------------------------------
 
@@ -90,7 +105,7 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `obra`
 --
 ALTER TABLE `obra`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario`

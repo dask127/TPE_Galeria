@@ -1,6 +1,5 @@
 <?php
-    require_once 'Controller/TasksController.php';
-    require_once 'Controller/TasksAdvanceController.php';
+    require_once 'Controller/GalleryController.php';
     require_once 'RouterClass.php';
     
     // CONSTANTES PARA RUTEO
@@ -9,21 +8,10 @@
     $r = new Router();
 
     // rutas
-    $r->addRoute("home", "GET", "TasksController", "Home");
-    $r->addRoute("mermelada", "GET", "TasksController", "Home");
-
-    //Esto lo veo en TasksView
-    $r->addRoute("insert", "POST", "TasksController", "InsertTask");
-
-    $r->addRoute("delete/:ID", "GET", "TasksController", "BorrarLaTaskQueVienePorParametro");
-    $r->addRoute("completar/:ID", "GET", "TasksController", "MarkAsCompletedTask");
-    $r->addRoute("edit/:ID", "GET", "TasksController", "EditTask");
+    $r->addRoute("home", "GET", "GalleryController", "Home");
 
     //Ruta por defecto.
-    $r->setDefaultRoute("TasksController", "Home");
-
-    //Advance
-    $r->addRoute("autocompletar", "GET", "TasksAdvanceController", "AutoCompletar");
+    $r->setDefaultRoute("GalleryController", "Home");
 
     //run
     $r->route($_GET['action'], $_SERVER['REQUEST_METHOD']); 
