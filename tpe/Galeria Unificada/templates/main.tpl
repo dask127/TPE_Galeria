@@ -1,7 +1,6 @@
 {include file="header.tpl"}
 {include file="asideMenu.tpl"}
 {include file="asideRegistro.tpl"}
-{include file="body.tpl"}
 
 
 <ul class="feed" id="js-feed">

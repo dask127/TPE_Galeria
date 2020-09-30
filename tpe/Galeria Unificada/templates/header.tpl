@@ -10,10 +10,9 @@
 </head>
 
 <body>
-    <script src="js/spa.js"></script>
-    <script src="js/register.js"></script>
-    <script src="js/table-rest.js"></script>
-    <script src="js/recientes.js"></script>
+    <script src="../js/spa.js"></script>
+    <script src="../js/register.js"></script>
+    <script src="../js/recientes.js"></script>
 
     <header class="header__up sticky">
         <nav class="header__up_nav">
@@ -21,8 +20,7 @@
                 <li>
                     <button id="js-openOptions">
                         <svg viewBox="0 0 100 100" class="icon">
-                            <path
-                                d="M9.375,25.781h81.25c1.727,0,3.125-1.399,3.125-3.125v-7.813c0-1.726-1.398-3.125-3.125-3.125H9.375
+                            <path d="M9.375,25.781h81.25c1.727,0,3.125-1.399,3.125-3.125v-7.813c0-1.726-1.398-3.125-3.125-3.125H9.375
                         c-1.726,0-3.125,1.399-3.125,3.125v7.813C6.25,24.382,7.649,25.781,9.375,25.781z M9.375,57.031h81.25
                          c1.727,0,3.125-1.398,3.125-3.125v-7.813c0-1.726-1.398-3.125-3.125-3.125H9.375c-1.726,0-3.125,1.399-3.125,3.125v7.813
                         C6.25,55.633,7.649,57.031,9.375,57.031z M9.375,88.281h81.25c1.727,0,3.125-1.398,3.125-3.125v-7.813
@@ -32,7 +30,9 @@
                 </li>
                 <li>
                     <button id="js-logo">
-                        <img src="images/logo.png" alt="" class="logo">
+                        <a href="home">
+                            <img src="images/logo.png" alt="" class="logo">
+                        </a>
                     </button>
                 </li>
                 <li>
@@ -49,4 +49,4 @@
             </ul>
         </nav>
     </header>
-        <section class="content">
+    <section class="content">

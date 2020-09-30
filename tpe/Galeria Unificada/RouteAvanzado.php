@@ -9,10 +9,12 @@
 
     // rutas
     $r->addRoute("home", "GET", "GalleryController", "Home");
+    $r->addRoute("about", "GET", "GalleryController", "About");
+    $r->addRoute("contact", "GET", "GalleryController", "Contact");
+    $r->addRoute("table", "GET", "GalleryController", "Table");
 
     //Ruta por defecto.
     $r->setDefaultRoute("GalleryController", "Home");
 
     //run
-    $r->route($_GET['action'], $_SERVER['REQUEST_METHOD']); 
-?>
+    $r->route($_GET['action'], $_SERVER['REQUEST_METHOD']);

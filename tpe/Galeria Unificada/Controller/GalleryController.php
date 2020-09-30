@@ -19,6 +19,18 @@ class GalleryController{
         $this->view->ShowHome($artworks);
     }
 
+    function About(){
+        $this->view->ShowAbout();
+    }
+
+    function Contact(){
+        $this->view->ShowContact();
+    }
+
+    function Table(){
+        $this->view->ShowTable();
+    }
+
     // function InsertTask(){
 
     //     $completed = 0;

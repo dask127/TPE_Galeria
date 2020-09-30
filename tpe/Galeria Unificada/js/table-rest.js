@@ -316,3 +316,5 @@ function cargarTabla() {
     mostrarTabla();
 
 }
+
+mostrarTabla();
