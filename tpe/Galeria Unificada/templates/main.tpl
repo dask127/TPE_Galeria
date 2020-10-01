@@ -1,6 +1,4 @@
-{include file="header.tpl"}
-{include file="asideMenu.tpl"}
-{include file="asideRegistro.tpl"}
+
 
 
 <ul class="feed" id="js-feed">
@@ -73,20 +71,5 @@
 
         </section>
     </li>
-    <li class="recent content_centered">
-        <hr class="divider">
 
-        <h1 class="list__title">Obras Recientes</h1>
 
-        <hr class="divider_transparent">
-
-        <section class="recent__section">
-            <ul id="js-recent_artwork" class="recent__list">
-
-            </ul>
-        </section>
-
-    </li>
-</ul>
-
-{include file="footer.tpl"}

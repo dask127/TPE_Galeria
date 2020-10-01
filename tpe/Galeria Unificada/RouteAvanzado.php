@@ -12,6 +12,7 @@
     $r->addRoute("about", "GET", "GalleryController", "About");
     $r->addRoute("contact", "GET", "GalleryController", "Contact");
     $r->addRoute("table", "GET", "GalleryController", "Table");
+    $r->addRoute("details/:ID", "GET", "GalleryController", "Details");
 
     //Ruta por defecto.
     $r->setDefaultRoute("GalleryController", "Home");

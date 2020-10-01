@@ -13,13 +13,14 @@ class GalleryView{
         $this->title = "Galeria de Arte";
     }
 
-    function ShowHome($tasks){
-        // print_r($tasks);
+    function ShowHome($artworks){
+        // print_r($artworks);
         $smarty = new Smarty();
         $smarty->assign('titulo_s', $this->title);
+        $smarty->assign('obras_s', $artworks);
         // $smarty->assign('tareas_s', $tasks);
       
-        $smarty->display('templates/main.tpl'); // muestro el template 
+        $smarty->display('templates/recent.tpl'); // muestro el template 
     }
 
     function ShowAbout(){
@@ -45,6 +46,20 @@ class GalleryView{
       
         $smarty->display('templates/table.tpl'); // muestro el template 
     }
+
+    function ShowDetails($artwork){
+        $smarty = new Smarty();
+        $css = "../css/style.css";
+        $smarty->assign('css', $css);
+        $smarty->assign('titulo_s', $this->title);
+        $smarty->assign('obra', $artwork);
+        // $smarty->assign('tareas_s', $tasks);
+
+      
+        $smarty->display('templates/details.tpl'); // muestro el template 
+    }
+
+
 
     function ShowEditTask($task){
         //TODO hacer con Smarty

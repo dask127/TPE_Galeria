@@ -335,6 +335,11 @@ input[type="number"] {
   position: relative;
 }
 
+.card__container a {
+  color: inherit;
+  text-decoration: none;
+}
+
 .card__container .img__featured {
   border-radius: 8px;
   width: 100%;
@@ -366,8 +371,9 @@ input[type="number"] {
   font-size: 1.2em;
 }
 
-.card__container .card__text h5 {
+.card__container .card__text h6 {
   padding-top: 2%;
+  font-size: 1.2rem;
 }
 
 @media screen and (min-width: 660px) {

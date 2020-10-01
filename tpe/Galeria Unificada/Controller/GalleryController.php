@@ -31,6 +31,12 @@ class GalleryController{
         $this->view->ShowTable();
     }
 
+    function Details($params = null){
+        $obra_id = $params[':ID'];
+        $artwork = $this->model->GetArtwork($obra_id);
+        $this->view->ShowDetails($artwork);
+    }
+
     // function InsertTask(){
 
     //     $completed = 0;
