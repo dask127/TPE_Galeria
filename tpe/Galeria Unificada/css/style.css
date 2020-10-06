@@ -72,6 +72,31 @@ input[type="number"] {
           box-shadow: 0px 10px 7px 1px rgba(0, 0, 0, 0.4);
 }
 
+.artworks_container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  width: 100%;
+  height: 100%;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.artworks_container table th {
+  padding: 2% 5%;
+}
+
+.artworks_container table tr td {
+  text-align: center;
+  padding: 2% 5%;
+  border-bottom: 2px solid black;
+}
+
 .header__up_items {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -290,6 +315,20 @@ input[type="number"] {
   text-align: center;
 }
 
+.list__subtitle {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  font-size: 1em;
+  margin: auto;
+  margin-top: 2%;
+}
+
+.list__subtitle a {
+  color: inherit;
+  text-decoration: none;
+}
+
 .feed {
   list-style: none;
 }
@@ -326,6 +365,48 @@ input[type="number"] {
 
 .logo {
   width: 120px;
+}
+
+.mouse_hover:hover {
+  -webkit-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
+  background-color: #8996bb;
+  border-radius: 8px;
+  padding: 0 2%;
+}
+
+.a__card__style {
+  margin: 10%;
+  background-color: #8996bb;
+  border-radius: 8px;
+}
+
+.detail_layout {
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: 100%;
+}
+
+.detail_back h1 {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  font-size: 1rem;
+  color: white;
+  border-radius: 5px;
+  background-color: #434343;
+  padding: 0.7% 1%;
+}
+
+.detail_right {
+  margin-left: 5%;
 }
 
 .card__container {

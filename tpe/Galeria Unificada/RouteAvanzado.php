@@ -8,11 +8,15 @@
     $r = new Router();
 
     // rutas
+    $r->addRoute("abm", "GET", "GalleryController", "ABM");
     $r->addRoute("home", "GET", "GalleryController", "Home");
     $r->addRoute("about", "GET", "GalleryController", "About");
+    $r->addRoute("addartwork", "POST", "GalleryController", "AddArtworkToDB");
+    $r->addRoute("search", "POST", "GalleryController", "Search");
     $r->addRoute("contact", "GET", "GalleryController", "Contact");
-    $r->addRoute("table", "GET", "GalleryController", "Table");
+    $r->addRoute("artworks", "GET", "GalleryController", "Artworks");
     $r->addRoute("details/:ID", "GET", "GalleryController", "Details");
+    
 
     //Ruta por defecto.
     $r->setDefaultRoute("GalleryController", "Home");

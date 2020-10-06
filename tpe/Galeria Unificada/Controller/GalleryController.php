@@ -16,7 +16,9 @@ class GalleryController{
 
     function Home(){
         $artworks = $this->model->GetArtworks();
-        $this->view->ShowHome($artworks);
+       // muestra solo 2
+       $recent_artworks = array($artworks[0], $artworks[1]);
+        $this->view->ShowHome($recent_artworks);
     }
 
     function About(){
@@ -27,14 +29,44 @@ class GalleryController{
         $this->view->ShowContact();
     }
 
-    function Table(){
-        $this->view->ShowTable();
+    function abm(){
+        $artworks = $this->model->GetArtworks();
+        $this->view->ShowABM($artworks);
+    }
+
+    function AddArtworkToDB(){
+
+         $nombre = $_POST["nombre"];
+         $descripcion = $_POST["descripcion"];
+         $autor = $_POST["autor"];
+         $anio = $_POST["anio"];
+         $imagen = $_POST["imagen"];
+         $category = $_POST["category"];
+
+         $this->model->AddArtwork($nombre, $descripcion, $autor, $anio, $imagen, $category);
+
+
+         
+
+    }
+
+    function Search(){
+        print_r($_POST);
+        $category_id = $_POST["category"];
+        $artworks = $this->model->GetArtworkCategory($category_id);
+        var_dump($artworks);
+        $this->view->ShowAllArtworks($artworks);
     }
 
     function Details($params = null){
         $obra_id = $params[':ID'];
         $artwork = $this->model->GetArtwork($obra_id);
         $this->view->ShowDetails($artwork);
+    }
+
+    function Artworks(){
+        $artworks = $this->model->GetArtworks();
+        $this->view->ShowAllArtworks($artworks);
     }
 
     // function InsertTask(){
