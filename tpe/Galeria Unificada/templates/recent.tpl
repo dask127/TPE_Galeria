@@ -5,7 +5,7 @@
 
 
 
-<li class="recent content_centered">
+<li class="recent content_centered" id="cosa">
     <hr class="divider">
 
     <h1 class="list__title">Obras Recientes</h1>

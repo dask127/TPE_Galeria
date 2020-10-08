@@ -31,16 +31,23 @@ class GalleryModel
         return $sentencia->fetchAll(PDO::FETCH_OBJ);
     }
 
+    function GetCategories()
+    {
+        $sentencia = $this->db->prepare("SELECT * FROM categoria");
+        $sentencia->execute();
+        return $sentencia->fetchAll(PDO::FETCH_OBJ);
+    }
+
     function AddArtwork($nombre, $descripcion, $autor, $anio, $imagen, $category)
     {
         $sentencia = $this->db->prepare("INSERT INTO obra(nombre, descripcion, autor, anio,imagen,id_categoria) VALUES(?,?,?,?,?,?)");
         $sentencia->execute(array($nombre, $descripcion, $autor, $anio, $imagen, $category));
     }
 
-    function DeleteTaskDelModelo($task_id)
+    function DeleteArtwork($task_id)
     {
-        $sentencia = $this->db->prepare("DELETE FROM task WHERE id=?");
-        $sentencia->execute(array($task_id));
+        $sentencia = $this->db->prepare("DELETE FROM obra WHERE id=?");
+        $sentencia->execute([$task_id]);
     }
 
     //   function InsertTask($title,$description,$completed,$priority){

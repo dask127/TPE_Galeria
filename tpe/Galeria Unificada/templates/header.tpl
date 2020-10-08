@@ -12,9 +12,10 @@
 </head>
 
 <body>
-    <script src="../js/spa.js"></script>
-    <script src="../js/register.js"></script>
-    <script src="../js/recientes.js"></script>
+    <script src="js/register.js"></script>
+    <script src="js/recientes.js"></script>
+
+
 
     <header class="header__up sticky">
         <nav class="header__up_nav">

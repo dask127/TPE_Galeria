@@ -14,7 +14,6 @@ class GalleryView{
     }
 
     function ShowHome($artworks){
-        // print_r($artworks);
         $smarty = new Smarty();
         $smarty->assign('titulo_s', $this->title);
         $smarty->assign('obras_s', $artworks);
@@ -29,6 +28,15 @@ class GalleryView{
         $smarty->assign('obras', $artworks);
 
         $smarty->display('templates/artworks.tpl');
+    }
+    
+
+    function showAllCategories($categories){
+        $smarty = new Smarty();
+        $smarty->assign('titulo_s', $this->title);
+        $smarty->assign('categorias', $categories);
+
+        $smarty->display('templates/categories.tpl');
     }
 
     function ShowAbout(){
@@ -62,7 +70,6 @@ class GalleryView{
         $smarty->assign('css', $css);
         $smarty->assign('titulo_s', $this->title);
         $smarty->assign('obra', $artwork);
-        // $smarty->assign('tareas_s', $tasks);
 
         $smarty->display('templates/details.tpl'); // muestro el template 
     }
@@ -76,6 +83,16 @@ class GalleryView{
 
     function ShowHomeLocation(){
         header("Location: ".BASE_URL."home");
+    }
+
+    function ShowABMLocation(){
+        header("Location: ".BASE_URL."abm");
+    }
+
+    function volver() {
+        if (isset($_SERVER["HTTP_REFERER"])) {
+            header("Location: " . $_SERVER["HTTP_REFERER"]);
+        }
     }
 
     

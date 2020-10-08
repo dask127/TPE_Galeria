@@ -3,69 +3,93 @@
 require_once "./View/GalleryView.php";
 require_once "./Model/GalleryModel.php";
 
-class GalleryController{
+class GalleryController
+{
 
     private $view;
     private $model;
 
-    function __construct(){
+    function __construct()
+    {
         $this->view = new GalleryView();
         $this->model = new GalleryModel();
-
     }
 
-    function Home(){
+    function Home()
+    {
         $artworks = $this->model->GetArtworks();
-       // muestra solo 2
-       $recent_artworks = array($artworks[0], $artworks[1]);
+        // muestra solo 2
+        $recent_artworks = array($artworks[0], $artworks[1]);
         $this->view->ShowHome($recent_artworks);
     }
 
-    function About(){
+    function About()
+    {
         $this->view->ShowAbout();
     }
 
-    function Contact(){
+    function Contact()
+    {
         $this->view->ShowContact();
     }
 
-    function abm(){
+    function ABM()
+    {
         $artworks = $this->model->GetArtworks();
         $this->view->ShowABM($artworks);
     }
 
-    function AddArtworkToDB(){
+    function AddArtworkToDB()
+    {
 
-         $nombre = $_POST["nombre"];
-         $descripcion = $_POST["descripcion"];
-         $autor = $_POST["autor"];
-         $anio = $_POST["anio"];
-         $imagen = $_POST["imagen"];
-         $category = $_POST["category"];
+        $nombre = $_POST["nombre"];
+        $descripcion = $_POST["descripcion"];
+        $autor = $_POST["autor"];
+        $anio = $_POST["anio"];
+        $imagen = $_POST["imagen"];
+        $category = $_POST["category"];
 
-         $this->model->AddArtwork($nombre, $descripcion, $autor, $anio, $imagen, $category);
-
-
-         
-
+        $this->model->AddArtwork($nombre, $descripcion, $autor, $anio, $imagen, $category);
+        $this->view->ShowABMLocation();
     }
 
-    function Search(){
-        print_r($_POST);
+    function Search()
+    {
         $category_id = $_POST["category"];
         $artworks = $this->model->GetArtworkCategory($category_id);
-        var_dump($artworks);
         $this->view->ShowAllArtworks($artworks);
     }
 
-    function Details($params = null){
+    function Categories()
+    {
+        $categories = $this->model->GetCategories();
+        $this->view->ShowAllCategories($categories);
+    }
+
+    function Delete($params = null)
+    {
+        $obra_id = $params[':ID'];
+        $artwork = $this->model->DeleteArtwork($obra_id);
+        $this->view->ShowABMLocation();
+    }
+
+    function Details($params = null)
+    {
         $obra_id = $params[':ID'];
         $artwork = $this->model->GetArtwork($obra_id);
         $this->view->ShowDetails($artwork);
     }
 
-    function Artworks(){
+    function Artworks()
+    {
         $artworks = $this->model->GetArtworks();
+        $this->view->ShowAllArtworks($artworks);
+    }
+
+    function Admin()
+    {
+        $category_id = $_POST["category"];
+        $artworks = $this->model->GetArtworkCategory($category_id);
         $this->view->ShowAllArtworks($artworks);
     }
 

@@ -1,20 +1,15 @@
-{include file="header.tpl"}
-{include file="asideMenu.tpl"}
-{include file="asideRegistro.tpl"}
 
-<form action="search" method="post">
+
+<form action="abm" method="post" class="form_abm">
     <label>Elija una categoría:</label>
-    <select name="category">
+    <select name="category" id="select_abm">
         <option value="1">Pintura</option>
         <option value="2">Dibujo</option>
         <option value="3">Escultura</option>
     </select>
-    <button type="submit">Consultar</button>
+    <button id="btn_abm" type="submit">Consultar</button>
 </form>
 
-<button>
-    <a href="categories">Mostrar categorías</a>
-</button>
 
 <article class="artworks_container">
 
@@ -56,4 +51,4 @@
     </table>
 
 
-    {include file="footer.tpl"}
+            <script src="js/table_abm.js"></script>
