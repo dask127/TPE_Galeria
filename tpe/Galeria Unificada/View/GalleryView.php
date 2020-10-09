@@ -74,6 +74,14 @@ class GalleryView{
         $smarty->display('templates/details.tpl'); // muestro el template 
     }
 
+    function ShowLogin(){
+        $smarty = new Smarty();
+        $smarty->assign('titulo_s', $this->title);
+        // $smarty->assign('obras', $artworks);
+
+        $smarty->display('templates/login.tpl');
+    }
+
 
 
     function ShowEditTask($task){
@@ -87,6 +95,10 @@ class GalleryView{
 
     function ShowABMLocation(){
         header("Location: ".BASE_URL."abm");
+    }
+
+    function ShowABMLogin(){
+        header("Location: ".BASE_URL."loginscreen");
     }
 
     function volver() {

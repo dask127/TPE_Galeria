@@ -1,6 +1,6 @@
 {include file="header.tpl"}
 {include file="asideMenu.tpl"}
-{include file="asideRegistro.tpl"}
+{* {include file="asideRegistro.tpl"} *}
 
 <h1> Crear obra </h1>
 <form action="addartwork" method="post">
@@ -19,7 +19,7 @@
     <label>Imagen (link):</label>
     <input name="imagen" type="url" placeholder="Imagen...">
 
-    <label>C    ategoría:</label>
+    <label>Categoría:</label>
     <select name="category">
         <option value="1">Pintura</option>
         <option value="2">Dibujo</option>

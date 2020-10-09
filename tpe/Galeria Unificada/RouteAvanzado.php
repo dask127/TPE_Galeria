@@ -14,7 +14,11 @@
     $r->addRoute("about", "GET", "GalleryController", "About");
     // $r->addRoute("show", "POST", "GalleryController", "Search");
     $r->addRoute("contact", "GET", "GalleryController", "Contact");
-    
+
+    //parte del registro y login
+    $r->addRoute("register", "POST", "GalleryController", "Register");
+    $r->addRoute("loginscreen", "GET", "GalleryController", "Login");
+    $r->addRoute("login", "POST", "GalleryController", "verifyUser");
 
     //parte de artworks y categories
     $r->addRoute("artworks", "GET", "GalleryController", "Artworks");

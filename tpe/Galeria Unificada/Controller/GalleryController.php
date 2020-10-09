@@ -2,21 +2,26 @@
 
 require_once "./View/GalleryView.php";
 require_once "./Model/GalleryModel.php";
+require_once "./Model/UserModel.php";
 
 class GalleryController
 {
 
     private $view;
     private $model;
+    private $UserModel;
 
     function __construct()
     {
         $this->view = new GalleryView();
         $this->model = new GalleryModel();
+        $this->UserModel = new UserModel();
     }
 
     function Home()
     {
+        session_start();
+        print_r($_SESSION);
         $artworks = $this->model->GetArtworks();
         // muestra solo 2
         $recent_artworks = array($artworks[0], $artworks[1]);
@@ -35,6 +40,7 @@ class GalleryController
 
     function ABM()
     {
+        $this->checkLoggedIn();
         $artworks = $this->model->GetArtworks();
         $this->view->ShowABM($artworks);
     }
@@ -51,6 +57,36 @@ class GalleryController
 
         $this->model->AddArtwork($nombre, $descripcion, $autor, $anio, $imagen, $category);
         $this->view->ShowABMLocation();
+    }
+
+    function Register()
+    {
+        $username = $_POST["username"];
+        $hash = password_hash($_POST["password"], PASSWORD_DEFAULT);
+
+        $this->UserModel->RegisterUser($username, $hash);
+        $this->view->ShowLogin();
+    }
+
+    function Login(){
+        $this->view->ShowLogin();
+    }
+
+    function verifyUser()
+    {
+        $username = $_POST["username"];
+        $password = $_POST["password"];
+
+        $user = $this->UserModel->getByUsername($username);
+
+        if (!empty($user) && password_verify($password, $user->password)) {
+
+            session_start();
+            $_SESSION["ID_USER"] = $user->id;
+            $_SESSION["USERNAME"] = $user->username;
+
+            $this->view->ShowABMLocation();
+        } else $this->view->ShowHomeLocation();
     }
 
     function Search()
@@ -91,6 +127,15 @@ class GalleryController
         $category_id = $_POST["category"];
         $artworks = $this->model->GetArtworkCategory($category_id);
         $this->view->ShowAllArtworks($artworks);
+    }
+
+    private function checkLoggedIn()
+    {
+        session_start();
+        if (!isset($_SESSION["ID_USER"])) {
+            $this->view->ShowHomeLocation();
+            die();
+        }
     }
 
     // function InsertTask(){
