@@ -16,16 +16,18 @@ class GalleryView{
     function ShowHome($artworks){
         $smarty = new Smarty();
         $smarty->assign('titulo_s', $this->title);
+ 
         $smarty->assign('obras_s', $artworks);
-        // $smarty->assign('tareas_s', $tasks);
       
         $smarty->display('templates/recent.tpl'); // muestro el template 
     }
 
-    function showAllArtworks($artworks){
+    function showAllArtworks($artworks, $categories){
         $smarty = new Smarty();
         $smarty->assign('titulo_s', $this->title);
+ 
         $smarty->assign('obras', $artworks);
+        $smarty->assign('categorias', $categories);
 
         $smarty->display('templates/artworks.tpl');
     }
@@ -34,6 +36,7 @@ class GalleryView{
     function showAllCategories($categories){
         $smarty = new Smarty();
         $smarty->assign('titulo_s', $this->title);
+ 
         $smarty->assign('categorias', $categories);
 
         $smarty->display('templates/categories.tpl');
@@ -42,6 +45,7 @@ class GalleryView{
     function ShowAbout(){
         $smarty = new Smarty();
         $smarty->assign('titulo_s', $this->title);
+ 
         // $smarty->assign('tareas_s', $tasks);
       
         $smarty->display('templates/about.tpl'); // muestro el template 
@@ -50,18 +54,35 @@ class GalleryView{
     function ShowContact(){
         $smarty = new Smarty();
         $smarty->assign('titulo_s', $this->title);
+ 
         // $smarty->assign('tareas_s', $tasks);
       
         $smarty->display('templates/contact.tpl'); // muestro el template 
     }
 
 
-    function ShowABM($artworks){
+    function ShowABM(){
         $smarty = new Smarty();
         $smarty->assign('titulo_s', $this->title);
-        $smarty->assign('obras', $artworks);
-
         $smarty->display('templates/abm.tpl');
+    }
+
+    function ShowArtworkABM($artworks, $categories){
+
+        $smarty = new Smarty();
+        $smarty->assign('obras', $artworks);
+        $smarty->assign('titulo_s', $this->title);
+        $smarty->assign('categorias', $categories);
+
+        $smarty->display('templates/artworkabm.tpl');
+    }
+
+    
+    function ShowCategoryABM($categories){
+        $smarty = new Smarty();
+        $smarty->assign('categorias', $categories);
+        $smarty->assign('titulo_s', $this->title);
+        $smarty->display('templates/categoryabm.tpl');
     }
 
     function ShowDetails($artwork){
@@ -70,8 +91,32 @@ class GalleryView{
         $smarty->assign('css', $css);
         $smarty->assign('titulo_s', $this->title);
         $smarty->assign('obra', $artwork);
+ 
 
         $smarty->display('templates/details.tpl'); // muestro el template 
+    }
+
+    
+    function ShowArtEdit($artwork, $categories){
+
+        $smarty = new Smarty();
+        $css = "../css/style.css";
+        $smarty->assign('css', $css);
+        $smarty->assign('titulo_s', $this->title);
+        $smarty->assign('obra', $artwork);
+        $smarty->assign('categorias', $categories);
+
+        $smarty->display('templates/artworkedit.tpl');
+    }
+
+    function ShowCategoryEdit($category){
+        $smarty = new Smarty();
+        $css = "../css/style.css";
+        $smarty->assign('css', $css);
+        $smarty->assign('titulo_s', $this->title);
+        $smarty->assign('categoria', $category);
+
+        $smarty->display('templates/categoryedit.tpl');
     }
 
     function ShowLogin(){
@@ -97,6 +142,14 @@ class GalleryView{
         header("Location: ".BASE_URL."abm");
     }
 
+    function ShowArtworkABMLocation(){
+        header("Location: ".BASE_URL."artworkabm");
+    }
+
+    function ShowCategoryABMLocation(){
+        header("Location: ".BASE_URL."categoryabm");
+    }
+
     function ShowABMLogin(){
         header("Location: ".BASE_URL."loginscreen");
     }
@@ -109,6 +162,3 @@ class GalleryView{
 
     
 }
-
-
-?>
