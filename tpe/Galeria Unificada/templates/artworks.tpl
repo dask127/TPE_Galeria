@@ -3,17 +3,21 @@
 {include file="asideRegistro.tpl"}
 
 <form action="search" method="post">
-    <label>Elija una categoría:</label>
-    <select name="category">
-        {foreach from=$categorias item=categoria}
-            <option value="{$categoria->id}">{$categoria->nombre}</option>
-        {/foreach}
-    </select>
-    <button type="submit">Consultar</button>
+    <div class="search_container">
+        <label>Elija una categoría:</label>
+        <div class="search_category">
+            <select name="category">
+                {foreach from=$categorias item=categoria}
+                    <option value="{$categoria->id}">{$categoria->nombre}</option>
+                {/foreach}
+            </select>
+            <button class="register_btn_nomargin" type="submit">Consultar</button>
+        </div>
+    </div>
 </form>
 
 <button>
-    <a href="categories">Mostrar categorías</a>
+    <a class="register_btn_nomargin link_remover" href="categories">Mostrar categorías</a>
 </button>
 
 <article class="artworks_container">
@@ -47,8 +51,8 @@
                             <h4> Escultura </h4>
                         {/if}
                     </td>
-                    <td>
-                        <a href="details/{$obra->id}">Detalles</a>
+                    <td class="register_btn">
+                        <a class="link_remover" href="details/{$obra->id}">Detalles</a>
                     </td>
                 </tr>
             {/foreach}

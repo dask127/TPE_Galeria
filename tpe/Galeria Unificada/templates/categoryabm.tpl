@@ -2,22 +2,31 @@
 {include file="asideMenu.tpl"}
 {include file="asideRegistrado.tpl"}
 
-<h1> Crear categoría </h1>
-<form action="addcategory" method="post">
+<div class="category_container">
+    <h1> Crear categoría </h1>
+    <form action="addcategory" method="post">
 
-    <label>ID:</label>
-    <input type="number" name="id" placeholder="ID...">
+        <div class="input_container">
 
-    <label>Nombre:</label>
-    <input name="nombre" type="text" placeholder="Nombre...">
+            <div class="input_block">
+                <label>ID:</label>
+                <input type="number" name="id" placeholder="ID...">
+            </div>
 
-    <button type="submit">Agregar</button>
-</form>
+            <div class="input_block">
+                <label>Nombre:</label>
+                <input name="nombre" type="text" placeholder="Nombre...">
+            </div>
+
+            <button class="register_btn_nomargin" type="submit">Agregar</button>
+        </div>
+    </form>
+</div>
 
 
 <article class="artworks_container">
 
-    <table>
+    <table class="abm_table">
         <thead>
             <tr>
                 <th>ID</th>
@@ -33,10 +42,10 @@
                     <td>
                         <h3>{$categoria->nombre}</h3>
                     </td>
-                    <td>
+                    <td class="abm_button register_btn">
                         <a href="categorydelete/{$categoria->id}">Borrar</a>
                     </td>
-                    <td>
+                    <td class="abm_button register_btn">
                         <a href="categoryedit/{$categoria->id}">Editar</a>
                     </td>
                 </tr>

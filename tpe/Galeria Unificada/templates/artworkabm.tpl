@@ -4,43 +4,64 @@
 
 <h1> Crear obra </h1>
 <form action="addartwork" method="post">
-    <label>Nombre:</label>
-    <input name="nombre" type="text" placeholder="Nombre...">
+    <div class="abm_artwork_container">
 
-    <label>Descripcion:</label>
-    <input type="text" name="descripcion" placeholder="Descripción...">
+        <div class="input_block">
+            <label>Nombre:</label>
+            <input name="nombre" type="text" placeholder="Nombre...">
+        </div>
 
-    <label>Autor:</label>
-    <input name="autor" type="text" placeholder="Autor...">
+        <div class="input_block">
+            <label>Descripcion:</label>
+            <input type="text" name="descripcion" placeholder="Descripción...">
+        </div>
 
-    <label>Año:</label>
-    <input name="anio" type="date" placeholder="Año...">
+        <div class="input_block">
+            <label>Autor:</label>
+            <input name="autor" type="text" placeholder="Autor...">
+        </div>
 
-    <label>Imagen (link):</label>
-    <input name="imagen" type="url" placeholder="Imagen...">
+        <div class="input_block">
+            <label>Año:</label>
+            <input name="anio" type="date" placeholder="Año...">
+        </div>
 
-    <label>Categoría:</label>
-    <select name="category">
-        {foreach from=$categorias item=categoria}
-            <option value="{$categoria->id}">{$categoria->nombre}</option>
-        {/foreach}
-    </select>
+        <div class="input_block">
+            <label>Imagen (link):</label>
+            <input name="imagen" type="url" placeholder="Imagen...">
+        </div>
 
-    <button type="submit">Agregar</button>
+        <div class="input_block">
+            <label>Categoría:</label>
+            <select name="category">
+                {foreach from=$categorias item=categoria}
+                    <option value="{$categoria->id}">{$categoria->nombre}</option>
+                {/foreach}
+            </select>
+        </div>
+        <button class="register_btn_nomargin" type="submit">Agregar</button>
+    </div>
+
+
+    </div>
 </form>
 
 <form action="search" method="post">
-    <label>Filtrar por categoría:</label>
-    <select name="category">
-        {foreach from=$categorias item=categoria}
-            <option value="{$categoria->id}">{$categoria->nombre}</option>
-        {/foreach}
-    </select>
-    <button type="submit">Consultar</button>
+    <div class="search_container">
+        <label>Elija una categoría:</label>
+        <div class="search_category">
+            <select name="category">
+                {foreach from=$categorias item=categoria}
+                    <option value="{$categoria->id}">{$categoria->nombre}</option>
+                {/foreach}
+            </select>
+            <button class="register_btn_nomargin" type="submit">Consultar</button>
+        </div>
+    </div>
 </form>
 
 <article class="artworks_container">
-    <table>
+    <table class="abm_table abm_table_artwork">
         <thead>
             <tr>
                 <th>Nombre</th>
@@ -69,13 +90,13 @@
                             <h4> Escultura </h4>
                         {/if}
                     </td>
-                    <td>
+                    <td class="abm_button register_btn">
                         <a href="details/{$obra->id}">Detalles</a>
                     </td>
-                    <td>
+                    <td class="abm_button register_btn">
                         <a href="artdelete/{$obra->id}">Borrar</a>
                     </td>
-                    <td>
+                    <td class="abm_button register_btn">
                         <a href="artedit/{$obra->id}">Editar</a>
                     </td>
                 </tr>
