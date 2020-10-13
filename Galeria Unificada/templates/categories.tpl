@@ -1,3 +1,4 @@
+{include file="head.tpl"}
 {include file="header.tpl"}
 {include file="asideMenu.tpl"}
 {include file="asideRegistro.tpl"}
@@ -20,39 +21,24 @@
     <a class="register_btn_nomargin link_remover" href="categories">Mostrar categorías</a>
 </button>
 
+
 <article class="artworks_container">
 
     <table>
         <thead>
             <tr>
+                <th>ID</th>
                 <th>Nombre</th>
-                <th>Autor</th>
-                <th>Categoria</th>
             </tr>
         </thead>
         <tbody>
-            {foreach from=$obras item=obra}
+            {foreach from=$categorias item=categoria}
                 <tr>
                     <td>
-                        <h2>{$obra->nombre}</h2>
+                        <h2>{$categoria->id}</h2>
                     </td>
                     <td>
-                        <h3>{$obra->autor}</h3>
-                    </td>
-    
-                    <td>
-                        {if $obra->id_categoria eq 1}
-                            <h4> Pintura </h4>
-                        {/if}
-                        {if $obra->id_categoria eq 2}
-                            <h4> Dibujo </h4>
-                        {/if}
-                        {if $obra->id_categoria eq 3}
-                            <h4> Escultura </h4>
-                        {/if}
-                    </td>
-                    <td class="register_btn">
-                        <a class="link_remover" href="details/{$obra->id}">Detalles</a>
+                        <h3>{$categoria->nombre}</h3>
                     </td>
                 </tr>
             {/foreach}

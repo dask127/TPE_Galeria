@@ -87,8 +87,6 @@ class GalleryView{
 
     function ShowDetails($artwork){
         $smarty = new Smarty();
-        $css = "../css/style.css";
-        $smarty->assign('css', $css);
         $smarty->assign('titulo_s', $this->title);
         $smarty->assign('obra', $artwork);
  
@@ -100,8 +98,6 @@ class GalleryView{
     function ShowArtEdit($artwork, $categories){
 
         $smarty = new Smarty();
-        $css = "../css/style.css";
-        $smarty->assign('css', $css);
         $smarty->assign('titulo_s', $this->title);
         $smarty->assign('obra', $artwork);
         $smarty->assign('categorias', $categories);
@@ -111,8 +107,6 @@ class GalleryView{
 
     function ShowCategoryEdit($category){
         $smarty = new Smarty();
-        $css = "../css/style.css";
-        $smarty->assign('css', $css);
         $smarty->assign('titulo_s', $this->title);
         $smarty->assign('categoria', $category);
 

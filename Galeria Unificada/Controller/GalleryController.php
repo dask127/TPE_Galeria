@@ -135,8 +135,8 @@ class GalleryController
     function Search()
     {
         $category_id = $_POST["category"];
-        $artworks = $this->model->GetArtworkCategory($category_id);
-        $categories = $this->model->GetCategories();
+        $artworks = $this->modelArtwork->GetArtworkCategory($category_id);
+        $categories = $this->modelCategory->GetCategories();
 
         $this->view->ShowAllArtworks($artworks, $categories);
     }
