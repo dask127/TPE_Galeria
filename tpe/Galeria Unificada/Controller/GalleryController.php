@@ -1,27 +1,31 @@
 <?php
 
 require_once "./View/GalleryView.php";
-require_once "./Model/GalleryModel.php";
+//require_once "./Model/GalleryModel.php";
 require_once "./Model/UserModel.php";
+require_once "./Model/ArtworkModel.php";///add
+require_once "./Model/CategoryModel.php";///add
 
 class GalleryController
 {
 
     private $view;
-    private $model;
+    private $modelArtwork;
+    private $modelCategory;
     private $UserModel;
 
     function __construct()
     {
         $this->view = new GalleryView();
-        $this->model = new GalleryModel();
+        $this->modelArtwork = new ArtworkModel();
+        $this->modelCategory = new CategoryModel();
         $this->UserModel = new UserModel();
     }
 
     function Home()
     {
         // muestra solo 2
-        $recent_artworks  = $this->model->GetFrontArtworks(2);
+        $recent_artworks  = $this->modelArtwork->GetFrontArtworks(2);
         $this->view->ShowHome($recent_artworks);
         // $this->model->UpdateArtwork("cosa2", "esta es una prueba de la update", "yo 2", "2020-09-30", "https://previews.123rf.com/images/artshock/artshock1209/artshock120900045/15221647-imag-de-coraz%C3%B3n-en-el-cielo-azul-sobre-un-fondo-de-nubes-blancas-.jpg", "3", "13");
     }
@@ -45,8 +49,8 @@ class GalleryController
     function ArtworkABM()
     {
         $this->checkLoggedIn();
-        $artworks = $this->model->GetArtworks();
-        $categories = $this->model->GetCategories();
+        $artworks = $this->modelArtwork->GetArtworks();
+        $categories = $this->modelCategory->GetCategories();
 
         $this->view->ShowArtworkABM($artworks, $categories);
     }
@@ -54,7 +58,7 @@ class GalleryController
     function CategoryABM()
     {
         $this->checkLoggedIn();
-        $categories = $this->model->GetCategories();
+        $categories = $this->modelCategory->GetCategories();
         $this->view->ShowCategoryABM($categories);
     }
 
@@ -66,7 +70,7 @@ class GalleryController
         $nombre = $_POST["nombre"];
 
 
-        $this->model->AddCategory($id, $nombre);
+        $this->modelCategory->AddCategory($id, $nombre);
         $this->view->ShowCategoryABMLocation();
     }
 
@@ -81,7 +85,7 @@ class GalleryController
         $imagen = $_POST["imagen"];
         $category = $_POST["category"];
 
-        $this->model->AddArtwork($nombre, $descripcion, $autor, $anio, $imagen, $category);
+        $this->modelArtwork->AddArtwork($nombre, $descripcion, $autor, $anio, $imagen, $category);
         $this->view->ShowArtworkABMLocation();
     }
 
@@ -139,21 +143,21 @@ class GalleryController
 
     function Categories()
     {
-        $categories = $this->model->GetCategories();
+        $categories = $this->modelCategory->GetCategories();
         $this->view->ShowAllCategories($categories);
     }
 
     function DeleteArtwork($params = null)
     {
         $obra_id = $params[':ID'];
-        $artwork = $this->model->DeleteArtwork($obra_id);
+        $artwork = $this->modelArtwork->DeleteArtwork($obra_id);
         $this->view->ShowArtworkABMLocation();
     }
 
     function DeleteCategory($params = null)
     {
         $category_id = $params[':ID'];
-        $artwork = $this->model->DeleteCategory($category_id);
+        $artwork = $this->modelCategory->DeleteCategory($category_id);
         $this->view->ShowCategoryABMLocation();
     }
 
@@ -168,7 +172,7 @@ class GalleryController
         $category = $_POST["category"];
         $obra_id = $params[':ID'];
 
-        $this->model->UpdateArtwork($nombre, $descripcion, $autor, $anio, $imagen, $category, $obra_id);
+        $this->modelArtwork->UpdateArtwork($nombre, $descripcion, $autor, $anio, $imagen, $category, $obra_id);
         $this->view->ShowArtworkABMLocation();
     }
 
@@ -177,7 +181,7 @@ class GalleryController
         $nombre = $_POST["nombre"];
         $categoria_id = $params[':ID'];
 
-        $this->model->UpdateCategory($categoria_id, $nombre);
+        $this->modelCategory->UpdateCategory($categoria_id, $nombre);
         $this->view->ShowCategoryABMLocation();
     }
 
@@ -186,8 +190,8 @@ class GalleryController
         $this->checkLoggedIn();
 
         $obra_id = $params[':ID'];
-        $artwork = $this->model->GetArtwork($obra_id);
-        $categories = $this->model->GetCategories();
+        $artwork = $this->modelArtwork->GetArtwork($obra_id);
+        $categories = $this->modelCategory->GetCategories();
         $this->view->ShowArtEdit($artwork, $categories);
     }
 
@@ -196,21 +200,21 @@ class GalleryController
         $this->checkLoggedIn();
 
         $category_id = $params[':ID'];
-        $artwork = $this->model->GetCategory($category_id);
+        $artwork = $this->modelCategory->GetCategory($category_id);
         $this->view->ShowCategoryEdit($artwork);
     }
 
     function Details($params = null)
     {
         $obra_id = $params[':ID'];
-        $artwork = $this->model->GetArtwork($obra_id);
+        $artwork = $this->modelArtwork->GetArtwork($obra_id);
         $this->view->ShowDetails($artwork);
     }
 
     function Artworks()
     {
-        $artworks = $this->model->GetArtworks();
-        $categories = $this->model->GetCategories();
+        $artworks = $this->modelArtwork->GetArtworks();
+        $categories = $this->modelCategory->GetCategories();
         $this->view->ShowAllArtworks($artworks, $categories);
     }
 
