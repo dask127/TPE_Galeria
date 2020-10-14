@@ -2,157 +2,180 @@
 
 require_once "./libs/smarty/Smarty.class.php";
 
-class GalleryView{
-
+class GalleryView
+{
     
-
     private $title;
-    
+    private $sesion;
 
-    function __construct(){
+
+    function __construct()
+    {
         $this->title = "Galeria de Arte";
     }
 
-    function ShowHome($artworks){
-        $smarty = new Smarty();
-        $smarty->assign('titulo_s', $this->title);
- 
-        $smarty->assign('obras_s', $artworks);
-      
-        $smarty->display('templates/recent.tpl'); // muestro el template 
+    function setSesion($sesion)
+    {
+        $this->sesion = $sesion;
     }
 
-    function showAllArtworks($artworks, $categories){
+    function ShowHome($artworks)
+    {
         $smarty = new Smarty();
         $smarty->assign('titulo_s', $this->title);
- 
+        $smarty->assign('sesion', $this->sesion);
+        $smarty->assign('obras_s', $artworks);
+
+        $smarty->display('templates/recent.tpl');  
+    }
+
+    function showAllArtworks($artworks, $categories)
+    {
+        $smarty = new Smarty();
+        $smarty->assign('titulo_s', $this->title);
+        $smarty->assign('sesion', $this->sesion);
+
         $smarty->assign('obras', $artworks);
         $smarty->assign('categorias', $categories);
 
         $smarty->display('templates/artworks.tpl');
     }
-    
 
-    function showAllCategories($categories){
+
+    function showAllCategories($categories)
+    {
         $smarty = new Smarty();
         $smarty->assign('titulo_s', $this->title);
- 
+        $smarty->assign('sesion', $this->sesion);
+
         $smarty->assign('categorias', $categories);
 
         $smarty->display('templates/categories.tpl');
     }
 
-    function ShowAbout(){
+    function ShowAbout()
+    {
         $smarty = new Smarty();
         $smarty->assign('titulo_s', $this->title);
- 
-        // $smarty->assign('tareas_s', $tasks);
-      
-        $smarty->display('templates/about.tpl'); // muestro el template 
+        $smarty->assign('sesion', $this->sesion);
+
+        $smarty->display('templates/about.tpl');
     }
 
-    function ShowContact(){
+    function ShowContact()
+    {
         $smarty = new Smarty();
         $smarty->assign('titulo_s', $this->title);
- 
-        // $smarty->assign('tareas_s', $tasks);
-      
-        $smarty->display('templates/contact.tpl'); // muestro el template 
+        $smarty->assign('sesion', $this->sesion);
+
+        $smarty->display('templates/contact.tpl');
     }
 
 
-    function ShowABM(){
+    function ShowABM()
+    {
         $smarty = new Smarty();
         $smarty->assign('titulo_s', $this->title);
+        $smarty->assign('sesion', $this->sesion);
+
         $smarty->display('templates/abm.tpl');
     }
 
-    function ShowArtworkABM($artworks, $categories){
+    function ShowArtworkABM($artworks, $categories)
+    {
 
         $smarty = new Smarty();
         $smarty->assign('obras', $artworks);
         $smarty->assign('titulo_s', $this->title);
         $smarty->assign('categorias', $categories);
+        $smarty->assign('sesion', $this->sesion);
 
         $smarty->display('templates/artworkabm.tpl');
     }
 
-    
-    function ShowCategoryABM($categories){
+
+    function ShowCategoryABM($categories)
+    {
         $smarty = new Smarty();
         $smarty->assign('categorias', $categories);
         $smarty->assign('titulo_s', $this->title);
+        $smarty->assign('sesion', $this->sesion);
         $smarty->display('templates/categoryabm.tpl');
     }
 
-    function ShowDetails($artwork){
+    function ShowDetails($artwork)
+    {
         $smarty = new Smarty();
         $smarty->assign('titulo_s', $this->title);
+        $smarty->assign('sesion', $this->sesion);
         $smarty->assign('obra', $artwork);
- 
 
-        $smarty->display('templates/details.tpl'); // muestro el template 
+
+        $smarty->display('templates/details.tpl');
     }
 
-    
-    function ShowArtEdit($artwork, $categories){
+
+    function ShowArtEdit($artwork, $categories)
+    {
 
         $smarty = new Smarty();
         $smarty->assign('titulo_s', $this->title);
         $smarty->assign('obra', $artwork);
+        $smarty->assign('sesion', $this->sesion);
         $smarty->assign('categorias', $categories);
 
         $smarty->display('templates/artworkedit.tpl');
     }
 
-    function ShowCategoryEdit($category){
+    function ShowCategoryEdit($category)
+    {
         $smarty = new Smarty();
         $smarty->assign('titulo_s', $this->title);
         $smarty->assign('categoria', $category);
+        $smarty->assign('sesion', $this->sesion);
 
         $smarty->display('templates/categoryedit.tpl');
     }
 
-    function ShowLogin(){
+    function ShowLogin($error)
+    {
         $smarty = new Smarty();
         $smarty->assign('titulo_s', $this->title);
-        // $smarty->assign('obras', $artworks);
+        $smarty->assign('sesion', $this->sesion);
+        $smarty->assign("error", $error);
 
         $smarty->display('templates/login.tpl');
     }
 
-
-
-    function ShowEditTask($task){
-        //TODO hacer con Smarty
-      
+    function ShowHomeLocation()
+    {
+        header("Location: " . BASE_URL . "home");
     }
 
-    function ShowHomeLocation(){
-        header("Location: ".BASE_URL."home");
+    function ShowABMLocation()
+    {
+        header("Location: " . BASE_URL . "abm");
     }
 
-    function ShowABMLocation(){
-        header("Location: ".BASE_URL."abm");
+    function ShowArtworkABMLocation()
+    {
+        header("Location: " . BASE_URL . "artworkabm");
     }
 
-    function ShowArtworkABMLocation(){
-        header("Location: ".BASE_URL."artworkabm");
+    function ShowCategoryABMLocation()
+    {
+        header("Location: " . BASE_URL . "categoryabm");
     }
 
-    function ShowCategoryABMLocation(){
-        header("Location: ".BASE_URL."categoryabm");
+    function ShowABMLogin()
+    {
+        header("Location: " . BASE_URL . "loginscreen");
     }
 
-    function ShowABMLogin(){
-        header("Location: ".BASE_URL."loginscreen");
-    }
-
-    function volver() {
+    function volver()
+    {
         if (isset($_SERVER["HTTP_REFERER"])) {
             header("Location: " . $_SERVER["HTTP_REFERER"]);
         }
     }
-
-    
 }

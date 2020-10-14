@@ -23,31 +23,44 @@ class GalleryController
 
     function Home()
     {
+        $sesion = $this->loginController->asideLoggedIn();
+        $this->view->setSesion($sesion);
+        
         // muestra solo 2
         $recent_artworks  = $this->modelArtwork->GetFrontArtworks(2);
         $this->view->ShowHome($recent_artworks);
-        // $this->model->UpdateArtwork("cosa2", "esta es una prueba de la update", "yo 2", "2020-09-30", "https://previews.123rf.com/images/artshock/artshock1209/artshock120900045/15221647-imag-de-coraz%C3%B3n-en-el-cielo-azul-sobre-un-fondo-de-nubes-blancas-.jpg", "3", "13");
+
     }
 
     function About()
     {
+        $sesion = $this->loginController->asideLoggedIn();
+        $this->view->setSesion($sesion);
+
         $this->view->ShowAbout();
     }
 
     function Contact()
     {
+        $sesion = $this->loginController->asideLoggedIn();
+        $this->view->setSesion($sesion);
         $this->view->ShowContact();
     }
 
     function ABM()
     {
+
         $this->loginController->checkLoggedIn();
+        $sesion = $this->loginController->asideLoggedIn();
+        $this->view->setSesion($sesion);
         $this->view->ShowABM();
     }
 
     function ArtworkABM()
     {
         $this->loginController->checkLoggedIn();
+        $sesion = $this->loginController->asideLoggedIn();
+        $this->view->setSesion($sesion);
         $artworks = $this->modelArtwork->GetArtworks();
         $categories = $this->modelCategory->GetCategories();
 
@@ -57,6 +70,8 @@ class GalleryController
     function CategoryABM()
     {
         $this->loginController->checkLoggedIn();
+        $sesion = $this->loginController->asideLoggedIn();
+        $this->view->setSesion($sesion);
         $categories = $this->modelCategory->GetCategories();
         $this->view->ShowCategoryABM($categories);
     }
@@ -64,6 +79,8 @@ class GalleryController
     function AddCategoryToDB()
     {
         $this->loginController->checkLoggedIn();
+        $sesion = $this->loginController->asideLoggedIn();
+        $this->view->setSesion($sesion);
 
         $id = $_POST["id"];
         $nombre = $_POST["nombre"];
@@ -76,6 +93,8 @@ class GalleryController
     function AddArtworkToDB()
     {
         $this->loginController->checkLoggedIn();
+        $sesion = $this->loginController->asideLoggedIn();
+        $this->view->setSesion($sesion);
 
         $nombre = $_POST["nombre"];
         $descripcion = $_POST["descripcion"];
@@ -90,6 +109,9 @@ class GalleryController
 
     function Search()
     {
+        $sesion = $this->loginController->asideLoggedIn();
+        $this->view->setSesion($sesion);
+
         $category_id = $_POST["category"];
         $artworks = $this->modelArtwork->GetArtworkCategory($category_id);
         $categories = $this->modelCategory->GetCategories();
@@ -99,6 +121,9 @@ class GalleryController
 
     function Categories()
     {
+        $sesion = $this->loginController->asideLoggedIn();
+        $this->view->setSesion($sesion);
+
         $categories = $this->modelCategory->GetCategories();
         $this->view->ShowAllCategories($categories);
     }
@@ -169,6 +194,9 @@ class GalleryController
 
     function Artworks()
     {
+        $sesion = $this->loginController->asideLoggedIn();
+        $this->view->setSesion($sesion);
+
         $artworks = $this->modelArtwork->GetArtworks();
         $categories = $this->modelCategory->GetCategories();
         $this->view->ShowAllArtworks($artworks, $categories);

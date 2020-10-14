@@ -1,21 +1,6 @@
-{* <!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="{$css}">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <base href="{BASE_URL}">
-    <title>{$titulo_s}</title>
-</head> *}
 
 <body>
-    <script src="js/register.js"></script>
     <script src="js/recientes.js"></script>
-
-
 
     <header class="header__up sticky">
         <nav class="header__up_nav">
@@ -40,6 +25,12 @@
                 </li>
                 <li>
                     <button id="js-userRegister">
+
+
+
+                    {if $sesion}
+                       <h2> {$sesion} </h2>
+                    {else}
                         <svg viewBox="0 0 100 100" class="icon">
                             <path d="M97.5,42.5h-10v-10c0-1.375-1.125-2.5-2.5-2.5h-5c-1.375,0-2.5,1.125-2.5,2.5v10h-10c-1.375,0-2.5,1.125-2.5,2.5v5
 	                    c0,1.375,1.125,2.5,2.5,2.5h10v10c0,1.375,1.125,2.5,2.5,2.5h5c1.375,0,2.5-1.125,2.5-2.5v-10h10c1.375,0,2.5-1.125,2.5-2.5v-5
@@ -47,6 +38,8 @@
 	                    h-2.609c-3.469,1.594-7.328,2.5-11.391,2.5s-7.906-0.906-11.391-2.5H21C9.406,55,0,64.406,0,76v6.5C0,86.641,3.359,90,7.5,90h55
 	                    c4.141,0,7.5-3.359,7.5-7.5V76C70,64.406,60.594,55,49,55z" />
                         </svg>
+
+                    {/if}
                     </button>
                 </li>
             </ul>

@@ -1,7 +1,12 @@
 {include file="head.tpl"}
 {include file="header.tpl"}
 {include file="asideMenu.tpl"}
-{include file="asideRegistro.tpl"}
+
+{if $sesion}
+    {include file="asideRegistrado.tpl"}
+{else}
+    {include file="asideRegistro.tpl"}
+{/if}
 
 <div class="card__container">
     <h2>About Us</h2>

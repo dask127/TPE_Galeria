@@ -289,6 +289,26 @@ select {
   margin: auto;
 }
 
+.login_button_container {
+  padding-top: 2%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+}
+
+.login_error {
+  color: red;
+  padding-top: 2%;
+  font-size: 1rem;
+}
+
 .category_container {
   display: -webkit-box;
   display: -ms-flexbox;

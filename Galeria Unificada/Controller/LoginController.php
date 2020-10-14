@@ -20,26 +20,32 @@ class LoginController
         $hash = password_hash($_POST["password"], PASSWORD_DEFAULT);
 
         $this->UserModel->RegisterUser($username, $hash);
-        $this->view->ShowLogin();
+        $this->view->ShowLogin("");
     }
 
     function Logout()
     {
         session_start();
         session_destroy();
+        $this->view->setSesion(false);
         $this->view->ShowHomeLocation();
     }
 
     function Login()
     {
-        $this->view->ShowLogin();
+        $this->view->ShowLogin("");
     }
 
-
-    function isLoggedIn()
+    function asideLoggedIn()
     {
-        session_start();
-        return $_SESSION["USERNAME"];
+        if (isset($_SESSION["USERNAME"])) {
+            return $_SESSION["USERNAME"];
+        } else {
+            session_start();
+            if (isset($_SESSION["USERNAME"])) {
+                return $_SESSION["USERNAME"];
+            } else return false;
+        }
     }
 
 
@@ -55,8 +61,10 @@ class LoginController
             session_start();
             $_SESSION["ID_USER"] = $user->id;
             $_SESSION["USERNAME"] = $user->nombre;
+            $this->view->setSesion($this->asideLoggedIn());
             $this->view->ShowABMLocation();
-        } else $this->view->ShowHomeLocation();
+
+        } else $this->view->ShowLogin("Error: Usuario y/o contraseña incorrectos");
     }
 
 

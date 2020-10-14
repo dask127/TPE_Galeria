@@ -1,10 +1,11 @@
 {include file="head.tpl"}
 {include file="header.tpl"}
 {include file="asideMenu.tpl"}
-{* {include file="asideRegistro.tpl"} *}
+
 
 <section class="login_welcome">
     <h2>Por favor, inicie sesión</h2>
+    <h3 class="login_error">{$error}</h3>
 </section>
 
 <form action="login" method="post" class="register_aside_form">
