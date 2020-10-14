@@ -12,12 +12,12 @@
 
             <div class="input_block">
                 <label>Nombre:</label>
-                <input name="nombre" type="text" placeholder="{$obra->nombre}...">
+                <input name="nombre" type="text" value="{$obra->nombre}">
             </div>
 
             <div class="input_block">
                 <label>Descripcion:</label>
-                <input type="text" name="descripcion" placeholder="{$obra->descripcion}...">
+                <input type="text" name="descripcion" value="{$obra->descripcion}">
             </div>
         </div>
 
@@ -25,12 +25,12 @@
 
             <div class="input_block">
                 <label>Autor:</label>
-                <input name="autor" type="text" placeholder="{$obra->autor}...">
+                <input name="autor" type="text" value="{$obra->autor}s">
             </div>
 
             <div class="input_block">
                 <label>Año:</label>
-                <input name="anio" type="date" placeholder="{$obra->anio}...">
+                <input name="anio" type="date" value="{$obra->anio}">
             </div>
         </div>
 
@@ -39,7 +39,7 @@
             <div class="input_block">
 
                 <label>Imagen (link):</label>
-                <input name="imagen" type="url" placeholder="Imagen...">
+                <input name="imagen" type="url" value="{$obra->imagen}">
             </div>
 
             <div class="input_block">
@@ -53,8 +53,8 @@
             </div>
         </div>
 
-        </form>
         <button class="register_btn_nomargin" type="submit">Terminar edición</button>
+    </form>
 </div>
 
 {include file="footer.tpl"}
