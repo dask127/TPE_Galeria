@@ -1,5 +1,6 @@
 <?php
 require_once 'Controller/GalleryController.php';
+require_once 'Controller/LoginController.php';
 require_once 'RouterClass.php';
 
 // CONSTANTES PARA RUTEO
@@ -10,14 +11,13 @@ $r = new Router();
 // rutas
 $r->addRoute("home", "GET", "GalleryController", "Home");
 $r->addRoute("about", "GET", "GalleryController", "About");
-// $r->addRoute("show", "POST", "GalleryController", "Search");
 $r->addRoute("contact", "GET", "GalleryController", "Contact");
 
 //parte del registro y login
-$r->addRoute("register", "POST", "GalleryController", "Register");
-$r->addRoute("loginscreen", "GET", "GalleryController", "Login");
-$r->addRoute("login", "POST", "GalleryController", "verifyUser");
-$r->addRoute("logout", "GET", "GalleryController", "Logout");
+$r->addRoute("register", "POST", "LoginController", "Register");
+$r->addRoute("loginscreen", "GET", "LoginController", "Login");
+$r->addRoute("login", "POST", "LoginController", "verifyUser");
+$r->addRoute("logout", "GET", "LoginController", "Logout");
 
 //parte de artworks y categories
 $r->addRoute("artworks", "GET", "GalleryController", "Artworks");

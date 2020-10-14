@@ -223,7 +223,7 @@ select {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 15%;
+    padding-top: 15%;
 
     h2 {
         font-size: 2rem;
@@ -243,6 +243,11 @@ select {
 .link_remover {
     color: inherit;
     text-decoration: none;
+}
+
+.login_btn {
+    width: 100%;
+    margin: auto;
 }
 
 .category_container {

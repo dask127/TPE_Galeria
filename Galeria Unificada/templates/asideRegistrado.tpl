@@ -3,13 +3,11 @@
         <h2>Bienvenido otra vez!</h2>
     </section>
 
-    <form action="register" method="post" class="register_aside_form">
-        <div class="register_field">
+    <div class="register_field">
+        <a href="logout" class="link_remover login_btn">
             <button id="js-register" class="register_btn">
-                <a href="logout">
-                    Logout
-                </a>
+                Logout
             </button>
-        </div>
-    </form>
+        </a>
+    </div>
 </nav>

@@ -1,21 +1,20 @@
 <?php
 
 require_once "./View/GalleryView.php";
-//require_once "./Model/GalleryModel.php";
-require_once "./Model/UserModel.php";
-require_once "./Model/ArtworkModel.php";///add
-require_once "./Model/CategoryModel.php";///add
+require_once "./Model/ArtworkModel.php";
+require_once "./Model/CategoryModel.php";
 
 class GalleryController
 {
-
+    private $loginController;
     private $view;
     private $modelArtwork;
     private $modelCategory;
-    private $UserModel;
+
 
     function __construct()
     {
+        $this->loginController = new LoginController();
         $this->view = new GalleryView();
         $this->modelArtwork = new ArtworkModel();
         $this->modelCategory = new CategoryModel();
@@ -42,13 +41,13 @@ class GalleryController
 
     function ABM()
     {
-        $this->checkLoggedIn();
+        $this->loginController->checkLoggedIn();
         $this->view->ShowABM();
     }
 
     function ArtworkABM()
     {
-        $this->checkLoggedIn();
+        $this->loginController->checkLoggedIn();
         $artworks = $this->modelArtwork->GetArtworks();
         $categories = $this->modelCategory->GetCategories();
 
@@ -57,14 +56,14 @@ class GalleryController
 
     function CategoryABM()
     {
-        $this->checkLoggedIn();
+        $this->loginController->checkLoggedIn();
         $categories = $this->modelCategory->GetCategories();
         $this->view->ShowCategoryABM($categories);
     }
 
     function AddCategoryToDB()
     {
-        $this->checkLoggedIn();
+        $this->loginController->checkLoggedIn();
 
         $id = $_POST["id"];
         $nombre = $_POST["nombre"];
@@ -76,7 +75,7 @@ class GalleryController
 
     function AddArtworkToDB()
     {
-        $this->checkLoggedIn();
+        $this->loginController->checkLoggedIn();
 
         $nombre = $_POST["nombre"];
         $descripcion = $_POST["descripcion"];
@@ -87,49 +86,6 @@ class GalleryController
 
         $this->modelArtwork->AddArtwork($nombre, $descripcion, $autor, $anio, $imagen, $category);
         $this->view->ShowArtworkABMLocation();
-    }
-
-    function Register()
-    {
-        $username = $_POST["username"];
-        $hash = password_hash($_POST["password"], PASSWORD_DEFAULT);
-
-        $this->UserModel->RegisterUser($username, $hash);
-        $this->view->ShowLogin();
-    }
-
-    function Login()
-    {
-        $this->view->ShowLogin();
-    }
-
-    function Logout()
-    {
-        session_start();
-        session_destroy();
-        $this->view->ShowHomeLocation();
-    }
-
-    function isLoggedIn()
-    {
-        session_start();
-        return $_SESSION["USERNAME"];
-    }
-
-    function verifyUser()
-    {
-        $username = $_POST["username"];
-        $password = $_POST["password"];
-
-        $user = $this->UserModel->getByUsername($username);
-
-        if (!empty($user) && password_verify($password, $user->password)) {
-
-            session_start();
-            $_SESSION["ID_USER"] = $user->id;
-            $_SESSION["USERNAME"] = $user->nombre;
-            $this->view->ShowABMLocation();
-        } else $this->view->ShowHomeLocation();
     }
 
     function Search()
@@ -187,7 +143,7 @@ class GalleryController
 
     function ArtworkEdit($params = null)
     {
-        $this->checkLoggedIn();
+        $this->loginController->checkLoggedIn();
 
         $obra_id = $params[':ID'];
         $artwork = $this->modelArtwork->GetArtwork($obra_id);
@@ -197,7 +153,7 @@ class GalleryController
 
     function CategoryEdit($params = null)
     {
-        $this->checkLoggedIn();
+        $this->loginController->checkLoggedIn();
 
         $category_id = $params[':ID'];
         $artwork = $this->modelCategory->GetCategory($category_id);
@@ -216,14 +172,5 @@ class GalleryController
         $artworks = $this->modelArtwork->GetArtworks();
         $categories = $this->modelCategory->GetCategories();
         $this->view->ShowAllArtworks($artworks, $categories);
-    }
-
-    private function checkLoggedIn()
-    {
-        session_start();
-        if (!isset($_SESSION["ID_USER"])) {
-            $this->view->ShowHomeLocation();
-            die();
-        }
     }
 }
