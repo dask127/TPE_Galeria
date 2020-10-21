@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 13-10-2020 a las 03:22:45
+-- Tiempo de generación: 21-10-2020 a las 23:27:44
 -- Versión del servidor: 10.4.11-MariaDB
 -- Versión de PHP: 7.4.6
 
@@ -28,18 +28,19 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `categoria` (
-  `id` int(11) NOT NULL,
-  `nombre` varchar(100) NOT NULL
+  `id` int(20) NOT NULL,
+  `nombre_category` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `categoria`
 --
 
-INSERT INTO `categoria` (`id`, `nombre`) VALUES
+INSERT INTO `categoria` (`id`, `nombre_category`) VALUES
 (1, 'Pintura'),
 (2, 'Dibujo'),
-(3, 'Escultura');
+(3, 'Escultura'),
+(7, 'Default');
 
 -- --------------------------------------------------------
 
@@ -62,11 +63,12 @@ CREATE TABLE `obra` (
 --
 
 INSERT INTO `obra` (`id`, `nombre`, `descripcion`, `autor`, `anio`, `imagen`, `id_categoria`) VALUES
-(4, 'La Gioconda', 'El Retrato de Lisa Gherardini, es un óleo sobre tabla de álamo de 77 × 53 cm, pintado entre 1503 y 1519, es una obra pictórica del polímata renacentista italiano Leonardo da Vinci.', 'Leonardo Da Vinci', '1503-01-01', 'https://e00-elmundo.uecdn.es/assets/multimedia/imagenes/2019/07/02/15620614058072.jpg', 1),
-(5, 'El grito', ' La versión más famosa se encuentra en la Galería Nacional de Noruega y fue completada en 1893.', 'Edvard Munch', '1893-01-01', 'https://www.latercera.com/resizer/Cl0W6jWbj8PfL8U15xJWGyaTr7Q=/900x600/smart/arc-anglerfish-arc2-prod-copesa.s3.amazonaws.com/public/CXNSQYHH7FFKNJLH6SGZTZ3ABE.jpg', 1),
-(17, 'David', 'El David es una escultura de mármol blanco de 5,17 metros de altura y 5572 kilogramos de masa, realizada por Miguel Ángel Buonarroti entre 1501 y 1504 por encargo de la Opera del Duomo de la catedral de Santa María del Fiore de Florencia.', 'Miguel Ángel Buonarroti', '1504-01-01', 'https://cdn.culturagenial.com/es/imagenes/escultura-david-de-miguel-angel-og.jpg', 3),
-(18, 'El pensador', 'El escultor concibió esta pieza para decorar el tímpano del conjunto escultórico La puerta del Infierno, encargado por el Ministerio de Instrucción Pública y Bellas Artes de Francia. Esto serviría como entrada para el Museo de Artes Decorativas.', 'Auguste Rodin', '1881-01-01', 'https://www.lavanguardia.com/r/GODO/LV/p7/WebSite/2020/02/13/Recortada/img_tayala_20200213-152552_imagenes_lv_terceros_pensador_4-kxUH--656x492@LaVanguardia-Web.jpg', 3),
-(19, 'La persistencia de la memoria', 'Realizado mediante la técnica del óleo sobre lienzo, es de estilo surrealista y sus medidas son 24 x 33 cm. La obra fue exhibida en la primera exposición individual de Dalí en la Galerie Pierre Colle de París.', 'Salvador Dalí', '1931-01-01', 'https://10mosttoday.com/wp-content/uploads/2013/09/The_Persistence_of_Memory.jpg', 1);
+(24, 'La Gioconda', 'El Retrato de Lisa Gherardini, es un óleo sobre tabla de álamo de 77 × 53 cm, pintado entre 1503 y 1519, es una obra pictórica del polímata renacentista italiano Leonardo da Vinci.', 'Leonardo Da Vinci', '1503-01-01', 'https://e00-elmundo.uecdn.es/assets/multimedia/imagenes/2019/07/02/15620614058072.jpg', 1),
+(25, 'El grito', 'La versión más famosa se encuentra en la Galería Nacional de Noruega y fue completada en 1893.', 'Edvard Munch', '1893-01-01', 'https://www.latercera.com/resizer/Cl0W6jWbj8PfL8U15xJWGyaTr7Q=/900x600/smart/arc-anglerfish-arc2-prod-copesa.s3.amazonaws.com/public/CXNSQYHH7FFKNJLH6SGZTZ3ABE.jpg', 1),
+(26, 'David', 'El David es una escultura de mármol blanco de 5,17 metros de altura y 5572 kilogramos de masa, realizada por Miguel Ángel Buonarroti entre 1501 y 1504 por encargo de la Opera del Duomo de la catedral de Santa María del Fiore de Florencia.', 'Miguel Ángel Buonarroti', '1504-01-01', 'https://cdn.culturagenial.com/es/imagenes/escultura-david-de-miguel-angel-og.jpg', 3),
+(27, 'El Pensador', 'El escultor concibió esta pieza para decorar el tímpano del conjunto escultórico La puerta del Infierno, encargado por el Ministerio de Instrucción Pública y Bellas Artes de Francia. Esto serviría como entrada para el Museo de Artes Decorativas.', 'Auguste Rodin', '1881-01-01', 'https://www.lavanguardia.com/r/GODO/LV/p7/WebSite/2020/02/13/Recortada/img_tayala_20200213-152552_imagenes_lv_terceros_pensador_4-kxUH--656x492@LaVanguardia-Web.jpg', 3),
+(28, 'La persistencia de la memoria', 'Realizado mediante la técnica del óleo sobre lienzo, es de estilo surrealista y sus medidas son 24 x 33 cm. La obra fue exhibida en la primera exposición individual de Dalí en la Galerie Pierre Colle de París.', 'Salvador Dalí', '1931-01-01', 'https://10mosttoday.com/wp-content/uploads/2013/09/The_Persistence_of_Memory.jpg', 1),
+(29, '1213', '123123', '123123123', '0123-03-02', '', 7);
 
 -- --------------------------------------------------------
 
@@ -79,6 +81,13 @@ CREATE TABLE `usuario` (
   `nombre` varchar(100) NOT NULL,
   `password` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `usuario`
+--
+
+INSERT INTO `usuario` (`id`, `nombre`, `password`) VALUES
+(9, 'prueba', '$2y$10$JiO08nTlm88HruNGQgQTUup2PndbjiZz0B.bKobjy8XeL2v2tkbN6');
 
 --
 -- Índices para tablas volcadas
@@ -108,16 +117,22 @@ ALTER TABLE `usuario`
 --
 
 --
+-- AUTO_INCREMENT de la tabla `categoria`
+--
+ALTER TABLE `categoria`
+  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
 -- AUTO_INCREMENT de la tabla `obra`
 --
 ALTER TABLE `obra`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- Restricciones para tablas volcadas

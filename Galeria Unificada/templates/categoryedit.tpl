@@ -12,7 +12,7 @@
 
             <div class="input_block">
                 <label>Nombre:</label>
-                <input name="nombre" type="text" value="{$categoria->nombre}">
+                <input name="nombre" type="text" value="{$categoria->nombre_category}">
             </div>
         </div>
         

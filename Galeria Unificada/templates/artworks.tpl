@@ -9,7 +9,7 @@
         <div class="search_category">
             <select name="category">
                 {foreach from=$categorias item=categoria}
-                    <option value="{$categoria->id}">{$categoria->nombre}</option>
+                    <option value="{$categoria->id}">{$categoria->nombre_category}</option>
                 {/foreach}
             </select>
             <button class="register_btn_nomargin" type="submit">Consultar</button>
@@ -42,15 +42,7 @@
                     </td>
     
                     <td>
-                        {if $obra->id_categoria eq 1}
-                            <h4> Pintura </h4>
-                        {/if}
-                        {if $obra->id_categoria eq 2}
-                            <h4> Dibujo </h4>
-                        {/if}
-                        {if $obra->id_categoria eq 3}
-                            <h4> Escultura </h4>
-                        {/if}
+                        <h4>{$obra->nombre_category}
                     </td>
                     <td class="register_btn">
                         <a class="link_remover" href="details/{$obra->id}">Detalles</a>

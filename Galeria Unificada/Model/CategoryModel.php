@@ -23,10 +23,10 @@ class CategoryModel{
         return $sentencia->fetch(PDO::FETCH_OBJ);
     }
 
-    function AddCategory($id, $nombre)
+    function AddCategory($nombre)
     {
-        $sentencia = $this->db->prepare("INSERT INTO categoria(id, nombre) VALUES(?,?)");
-        $sentencia->execute(array($id, $nombre));
+        $sentencia = $this->db->prepare("INSERT INTO categoria(nombre_category) VALUES(?)");
+        $sentencia->execute(array($nombre));
     }
 
     function DeleteCategory($category_id)
@@ -37,7 +37,7 @@ class CategoryModel{
 
     function UpdateCategory($id, $nombre)
     {
-        $sentencia = $this->db->prepare("UPDATE categoria SET nombre=? WHERE id=?");
+        $sentencia = $this->db->prepare("UPDATE categoria SET nombre_category=? WHERE id=?");
         $sentencia->execute(array($nombre, $id));
     }
 }

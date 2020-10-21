@@ -13,12 +13,7 @@
     <form action="addcategory" method="post">
 
         <div class="input_container">
-
-            <div class="input_block">
-                <label>ID:</label>
-                <input type="number" name="id" placeholder="ID...">
-            </div>
-
+        
             <div class="input_block">
                 <label>Nombre:</label>
                 <input name="nombre" type="text" placeholder="Nombre...">
@@ -46,7 +41,7 @@
                         <h2>{$categoria->id}</h2>
                     </td>
                     <td>
-                        <h3>{$categoria->nombre}</h3>
+                        <h3>{$categoria->nombre_category}</h3>
                     </td>
                     <td class="abm_button register_btn">
                         <a href="categorydelete/{$categoria->id}">Borrar</a>

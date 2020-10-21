@@ -22,15 +22,8 @@
                         </div>
                     </div>
 
-                    {if $obra->id_categoria eq 1}
-                        <h4> Pintura </h4>
-                    {/if}
-                    {if $obra->id_categoria eq 2}
-                        <h4> Dibujo </h4>
-                    {/if}
-                    {if $obra->id_categoria eq 3}
-                        <h4> Escultura </h4>
-                    {/if}
+                        <h4> {$obra->nombre_category} </h4>
+
                     <h5>{$obra->anio} </h5>
                     <h6>{$obra->descripcion}</h6>
 

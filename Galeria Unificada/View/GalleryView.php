@@ -109,7 +109,7 @@ class GalleryView
         $smarty->assign('titulo_s', $this->title);
         $smarty->assign('sesion', $this->sesion);
         $smarty->assign('obra', $artwork);
-
+        print_r($artwork);
 
         $smarty->display('templates/details.tpl');
     }

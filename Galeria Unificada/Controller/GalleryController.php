@@ -25,7 +25,6 @@ class GalleryController
     {
         $sesion = $this->loginController->asideLoggedIn();
         $this->view->setSesion($sesion);
-        
         // muestra solo 2
         $recent_artworks  = $this->modelArtwork->GetFrontArtworks(2);
         $this->view->ShowHome($recent_artworks);
@@ -61,7 +60,7 @@ class GalleryController
         $this->loginController->checkLoggedIn();
         $sesion = $this->loginController->asideLoggedIn();
         $this->view->setSesion($sesion);
-        $artworks = $this->modelArtwork->GetArtworks();
+        $artworks = $this->modelArtwork->GetArtworkAndCategories();
         $categories = $this->modelCategory->GetCategories();
 
         $this->view->ShowArtworkABM($artworks, $categories);
@@ -82,11 +81,10 @@ class GalleryController
         $sesion = $this->loginController->asideLoggedIn();
         $this->view->setSesion($sesion);
 
-        $id = $_POST["id"];
         $nombre = $_POST["nombre"];
 
 
-        $this->modelCategory->AddCategory($id, $nombre);
+        $this->modelCategory->AddCategory($nombre);
         $this->view->ShowCategoryABMLocation();
     }
 
@@ -100,7 +98,11 @@ class GalleryController
         $descripcion = $_POST["descripcion"];
         $autor = $_POST["autor"];
         $anio = $_POST["anio"];
-        $imagen = $_POST["imagen"];
+
+        if (!(isset($_POST["imagen"]))) {
+            $imagen = "https://revor.com.ar/wp-content/uploads/2018/04/default-image.png";
+        } else $imagen = $_POST["imagen"];
+
         $category = $_POST["category"];
 
         $this->modelArtwork->AddArtwork($nombre, $descripcion, $autor, $anio, $imagen, $category);
@@ -149,7 +151,11 @@ class GalleryController
         $descripcion = $_POST["descripcion"];
         $autor = $_POST["autor"];
         $anio = $_POST["anio"];
-        $imagen = $_POST["imagen"];
+
+        if (!(isset($_POST["imagen"]))) {
+            $imagen = "https://revor.com.ar/wp-content/uploads/2018/04/default-image.png";
+        } else $imagen = $_POST["imagen"];
+
         $category = $_POST["category"];
         $obra_id = $params[':ID'];
 
@@ -169,6 +175,8 @@ class GalleryController
     function ArtworkEdit($params = null)
     {
         $this->loginController->checkLoggedIn();
+        $sesion = $this->loginController->asideLoggedIn();
+        $this->view->setSesion($sesion);
 
         $obra_id = $params[':ID'];
         $artwork = $this->modelArtwork->GetArtwork($obra_id);
@@ -188,8 +196,9 @@ class GalleryController
     function Details($params = null)
     {
         $obra_id = $params[':ID'];
-        $artwork = $this->modelArtwork->GetArtwork($obra_id);
-        $this->view->ShowDetails($artwork);
+        $artwork = $this->modelArtwork->GetArtworkAndCategory($obra_id);
+        print_r($artwork);
+        // $this->view->ShowDetails($artwork);
     }
 
     function Artworks()
@@ -197,7 +206,7 @@ class GalleryController
         $sesion = $this->loginController->asideLoggedIn();
         $this->view->setSesion($sesion);
 
-        $artworks = $this->modelArtwork->GetArtworks();
+        $artworks = $this->modelArtwork->GetArtworkAndCategories();
         $categories = $this->modelCategory->GetCategories();
         $this->view->ShowAllArtworks($artworks, $categories);
     }
