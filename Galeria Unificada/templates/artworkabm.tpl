@@ -1,7 +1,7 @@
 {include file="head.tpl"}
 {include file="header.tpl"}
 {include file="asideMenu.tpl"}
-{include file="asideRegistrado.tpl"}
+{include file="asideAdmin.tpl"}
 
 <h1> Crear obra </h1>
 <form action="addartwork" method="post">

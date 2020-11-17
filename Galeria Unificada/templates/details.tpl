@@ -2,7 +2,16 @@
 {include file="headdeeply.tpl"}
 {include file="header.tpl"}
 {include file="asideMenu.tpl"}
-{include file="asideRegistro.tpl"}
+
+{if $sesion neq null}
+    {if $sesion eq 1}
+        {include file="asideAdmin.tpl"}
+    {else}
+        {include file="asideUsuario.tpl"}
+    {/if}
+{else}
+    {include file="asideRegistro.tpl"}
+{/if}
 
 <div class="card__container">
     {* darle estilo LATER *}

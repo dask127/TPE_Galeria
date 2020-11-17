@@ -24,7 +24,7 @@ class ArtworkModel
         return $sentencia->fetch(PDO::FETCH_OBJ);
     }
 
-    function GetArtworkCategory($id_category)
+    function GetArtworksByCategory($id_category)
     {
         $sentencia = $this->db->prepare("SELECT * FROM obra WHERE id_categoria=?");
         $sentencia->execute([$id_category]);
@@ -66,9 +66,9 @@ class ArtworkModel
         return $sentencia->fetchAll(PDO::FETCH_OBJ);
     }
 
-    function GetArtworkAndCategory($obra_id)
+    function GetArtworkAndCategoryById($obra_id)
     {
-        $sentencia = $this->db->prepare("SELECT * FROM obra JOIN categoria ON obra.id_categoria = categoria.id WHERE id=?");
+        $sentencia = $this->db->prepare("SELECT * FROM obra JOIN categoria ON obra.id_categoria = categoria.id WHERE obra.id=?");
         $sentencia->execute([$obra_id]);
         return $sentencia->fetch(PDO::FETCH_OBJ);
     }

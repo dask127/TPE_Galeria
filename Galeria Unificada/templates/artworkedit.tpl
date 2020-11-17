@@ -1,7 +1,7 @@
 {include file="headdeeply.tpl"}
 {include file="header.tpl"}
 {include file="asideMenu.tpl"}
-{include file="asideRegistrado.tpl"}
+{include file="asideAdmin.tpl"}
 
 <h1> Editar obra </h1>
 

@@ -2,8 +2,12 @@
 {include file="header.tpl"}
 {include file="asideMenu.tpl"}
 
-{if $sesion}
-    {include file="asideRegistrado.tpl"}
+{if $sesion neq null}
+    {if $sesion eq 1}
+        {include file="asideAdmin.tpl"}
+    {else}
+        {include file="asideUsuario.tpl"}
+    {/if}
 {else}
     {include file="asideRegistro.tpl"}
 {/if}

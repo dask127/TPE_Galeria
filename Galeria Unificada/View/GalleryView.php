@@ -4,9 +4,10 @@ require_once "./libs/smarty/Smarty.class.php";
 
 class GalleryView
 {
-    
+
     private $title;
-    private $sesion;
+    private $sessionLevel;
+    private $sessionName;
 
 
     function __construct()
@@ -14,26 +15,33 @@ class GalleryView
         $this->title = "Galeria de Arte";
     }
 
-    function setSesion($sesion)
+    function setSessionLevel($sessionLevel)
     {
-        $this->sesion = $sesion;
+        $this->sessionLevel = $sessionLevel;
+    }
+
+    function setSessionName($name)
+    {
+        $this->sessionName = $name;
     }
 
     function ShowHome($artworks)
     {
         $smarty = new Smarty();
         $smarty->assign('titulo_s', $this->title);
-        $smarty->assign('sesion', $this->sesion);
+        $smarty->assign('sesion', $this->sessionLevel);
+        $smarty->assign('name', $this->sessionName);
         $smarty->assign('obras_s', $artworks);
 
-        $smarty->display('templates/recent.tpl');  
+        $smarty->display('templates/recent.tpl');
     }
 
     function showAllArtworks($artworks, $categories)
     {
         $smarty = new Smarty();
         $smarty->assign('titulo_s', $this->title);
-        $smarty->assign('sesion', $this->sesion);
+        $smarty->assign('sesion', $this->sessionLevel);
+        $smarty->assign('name', $this->sessionName);
 
         $smarty->assign('obras', $artworks);
         $smarty->assign('categorias', $categories);
@@ -41,13 +49,28 @@ class GalleryView
         $smarty->display('templates/artworks.tpl');
     }
 
+    function showArtworksByCategory($artworks, $categories, $category)
+    {
+
+        $smarty = new Smarty();
+        $smarty->assign('titulo_s', $this->title);
+        $smarty->assign('sesion', $this->sessionLevel);
+        $smarty->assign('name', $this->sessionName);
+
+        $smarty->assign('obras', $artworks);
+        $smarty->assign('tituloCategoria', $category);
+        $smarty->assign('categorias', $categories);
+
+        $smarty->display('templates/search.tpl');
+    }
+
 
     function showAllCategories($categories)
     {
         $smarty = new Smarty();
         $smarty->assign('titulo_s', $this->title);
-        $smarty->assign('sesion', $this->sesion);
-
+        $smarty->assign('sesion', $this->sessionLevel);
+        $smarty->assign('name', $this->sessionName);
         $smarty->assign('categorias', $categories);
 
         $smarty->display('templates/categories.tpl');
@@ -57,7 +80,8 @@ class GalleryView
     {
         $smarty = new Smarty();
         $smarty->assign('titulo_s', $this->title);
-        $smarty->assign('sesion', $this->sesion);
+        $smarty->assign('sesion', $this->sessionLevel);
+        $smarty->assign('name', $this->sessionName);
 
         $smarty->display('templates/about.tpl');
     }
@@ -66,7 +90,8 @@ class GalleryView
     {
         $smarty = new Smarty();
         $smarty->assign('titulo_s', $this->title);
-        $smarty->assign('sesion', $this->sesion);
+        $smarty->assign('sesion', $this->sessionLevel);
+        $smarty->assign('name', $this->sessionName);
 
         $smarty->display('templates/contact.tpl');
     }
@@ -76,7 +101,8 @@ class GalleryView
     {
         $smarty = new Smarty();
         $smarty->assign('titulo_s', $this->title);
-        $smarty->assign('sesion', $this->sesion);
+        $smarty->assign('sesion', $this->sessionLevel);
+        $smarty->assign('name', $this->sessionName);
 
         $smarty->display('templates/abm.tpl');
     }
@@ -88,7 +114,8 @@ class GalleryView
         $smarty->assign('obras', $artworks);
         $smarty->assign('titulo_s', $this->title);
         $smarty->assign('categorias', $categories);
-        $smarty->assign('sesion', $this->sesion);
+        $smarty->assign('sesion', $this->sessionLevel);
+        $smarty->assign('name', $this->sessionName);
 
         $smarty->display('templates/artworkabm.tpl');
     }
@@ -99,17 +126,30 @@ class GalleryView
         $smarty = new Smarty();
         $smarty->assign('categorias', $categories);
         $smarty->assign('titulo_s', $this->title);
-        $smarty->assign('sesion', $this->sesion);
+        $smarty->assign('sesion', $this->sessionLevel);
+        $smarty->assign('name', $this->sessionName);
         $smarty->display('templates/categoryabm.tpl');
+    }
+
+    function ShowUserABM($users, $logName)
+    {
+        $smarty = new Smarty();
+        $smarty->assign('usuarios', $users);
+        $smarty->assign('sessionName', $logName);
+        $smarty->assign('titulo_s', $this->title);
+        $smarty->assign('sesion', $this->sessionLevel);
+        $smarty->assign('name', $this->sessionName);
+
+        $smarty->display('templates/userabm.tpl');
     }
 
     function ShowDetails($artwork)
     {
         $smarty = new Smarty();
         $smarty->assign('titulo_s', $this->title);
-        $smarty->assign('sesion', $this->sesion);
+        $smarty->assign('sesion', $this->sessionLevel);
+        $smarty->assign('name', $this->sessionName);
         $smarty->assign('obra', $artwork);
-        print_r($artwork);
 
         $smarty->display('templates/details.tpl');
     }
@@ -121,7 +161,8 @@ class GalleryView
         $smarty = new Smarty();
         $smarty->assign('titulo_s', $this->title);
         $smarty->assign('obra', $artwork);
-        $smarty->assign('sesion', $this->sesion);
+        $smarty->assign('sesion', $this->sessionLevel);
+        $smarty->assign('name', $this->sessionName);
         $smarty->assign('categorias', $categories);
 
         $smarty->display('templates/artworkedit.tpl');
@@ -132,16 +173,34 @@ class GalleryView
         $smarty = new Smarty();
         $smarty->assign('titulo_s', $this->title);
         $smarty->assign('categoria', $category);
-        $smarty->assign('sesion', $this->sesion);
+        $smarty->assign('sesion', $this->sessionLevel);
+        $smarty->assign('name', $this->sessionName);
 
         $smarty->display('templates/categoryedit.tpl');
     }
 
-    function ShowLogin($error)
+    function ShowUserEdit($user)
     {
         $smarty = new Smarty();
         $smarty->assign('titulo_s', $this->title);
-        $smarty->assign('sesion', $this->sesion);
+        $smarty->assign('usuario', $user);
+        $smarty->assign('sesion', $this->sessionLevel);
+        $smarty->assign('name', $this->sessionName);
+
+        $smarty->display('templates/useredit.tpl');
+    }
+
+    function ShowLogin($error = null)
+    {
+
+        if ($error == null) {
+            $error = "";
+        }
+
+        $smarty = new Smarty();
+        $smarty->assign('titulo_s', $this->title);
+        $smarty->assign('sesion', $this->sessionLevel);
+        $smarty->assign('name', $this->sessionName);
         $smarty->assign("error", $error);
 
         $smarty->display('templates/login.tpl');
@@ -160,6 +219,11 @@ class GalleryView
     function ShowArtworkABMLocation()
     {
         header("Location: " . BASE_URL . "artworkabm");
+    }
+
+    function ShowUserABMLocation()
+    {
+        header("Location: " . BASE_URL . "userabm");
     }
 
     function ShowCategoryABMLocation()

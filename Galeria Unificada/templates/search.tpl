@@ -32,34 +32,37 @@
 
 <article class="artworks_container">
 
-    <table>
-        <thead>
-            <tr>
-                <th>Nombre</th>
-                <th>Autor</th>
-                <th>Categoria</th>
-            </tr>
-        </thead>
-        <tbody>
-            {foreach from=$obras item=obra}
-                <tr>
-                    <td>
-                        <h2>{$obra->nombre}</h2>
-                    </td>
-                    <td>
-                        <h3>{$obra->autor}</h3>
-                    </td>
+    {if $obras neq null}
+
+        <h1> Mostrando resultados para: {$tituloCategoria->nombre_category} </h1>
     
-                    <td>
-                        <h4>{$obra->nombre_category}
-                    </td>
-                    <td class="register_btn">
-                        <a class="link_remover" href="details/{$obra->id}">Detalles</a>
-                    </td>
+        <table>
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Autor</th>
                 </tr>
-            {/foreach}
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                {foreach from=$obras item=obra}
+                    <tr>
+                        <td>
+                            <h2>{$obra->nombre}</h2>
+                        </td>
+                        <td>
+                            <h3>{$obra->autor}</h3>
+                        </td>
+                        <td class="register_btn">
+                            <a class="link_remover" href="details/{$obra->id}">Detalles</a>
+                        </td>
+                    </tr>
+                {/foreach}
+            </tbody>
+        </table>
+    {else}
+        <h2 class="error"> No hay obras existentes para la búsqueda: {$tituloCategoria->nombre_category} </h2>
+    {/if}
+
 
 
     {include file="footer.tpl"}

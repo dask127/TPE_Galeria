@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 5.0.3
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 21-10-2020 a las 23:27:44
--- Versión del servidor: 10.4.11-MariaDB
--- Versión de PHP: 7.4.6
+-- Tiempo de generación: 17-11-2020 a las 04:01:28
+-- Versión del servidor: 10.4.14-MariaDB
+-- Versión de PHP: 7.4.11
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -67,8 +67,7 @@ INSERT INTO `obra` (`id`, `nombre`, `descripcion`, `autor`, `anio`, `imagen`, `i
 (25, 'El grito', 'La versión más famosa se encuentra en la Galería Nacional de Noruega y fue completada en 1893.', 'Edvard Munch', '1893-01-01', 'https://www.latercera.com/resizer/Cl0W6jWbj8PfL8U15xJWGyaTr7Q=/900x600/smart/arc-anglerfish-arc2-prod-copesa.s3.amazonaws.com/public/CXNSQYHH7FFKNJLH6SGZTZ3ABE.jpg', 1),
 (26, 'David', 'El David es una escultura de mármol blanco de 5,17 metros de altura y 5572 kilogramos de masa, realizada por Miguel Ángel Buonarroti entre 1501 y 1504 por encargo de la Opera del Duomo de la catedral de Santa María del Fiore de Florencia.', 'Miguel Ángel Buonarroti', '1504-01-01', 'https://cdn.culturagenial.com/es/imagenes/escultura-david-de-miguel-angel-og.jpg', 3),
 (27, 'El Pensador', 'El escultor concibió esta pieza para decorar el tímpano del conjunto escultórico La puerta del Infierno, encargado por el Ministerio de Instrucción Pública y Bellas Artes de Francia. Esto serviría como entrada para el Museo de Artes Decorativas.', 'Auguste Rodin', '1881-01-01', 'https://www.lavanguardia.com/r/GODO/LV/p7/WebSite/2020/02/13/Recortada/img_tayala_20200213-152552_imagenes_lv_terceros_pensador_4-kxUH--656x492@LaVanguardia-Web.jpg', 3),
-(28, 'La persistencia de la memoria', 'Realizado mediante la técnica del óleo sobre lienzo, es de estilo surrealista y sus medidas son 24 x 33 cm. La obra fue exhibida en la primera exposición individual de Dalí en la Galerie Pierre Colle de París.', 'Salvador Dalí', '1931-01-01', 'https://10mosttoday.com/wp-content/uploads/2013/09/The_Persistence_of_Memory.jpg', 1),
-(29, '1213', '123123', '123123123', '0123-03-02', '', 7);
+(28, 'La persistencia de la memoria', 'Realizado mediante la técnica del óleo sobre lienzo, es de estilo surrealista y sus medidas son 24 x 33 cm. La obra fue exhibida en la primera exposición individual de Dalí en la Galerie Pierre Colle de París.', 'Salvador Dalí', '1931-01-01', 'https://10mosttoday.com/wp-content/uploads/2013/09/The_Persistence_of_Memory.jpg', 1);
 
 -- --------------------------------------------------------
 
@@ -79,6 +78,7 @@ INSERT INTO `obra` (`id`, `nombre`, `descripcion`, `autor`, `anio`, `imagen`, `i
 CREATE TABLE `usuario` (
   `id` int(11) NOT NULL,
   `nombre` varchar(100) NOT NULL,
+  `admin_auth` tinyint(1) NOT NULL DEFAULT 0,
   `password` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -86,8 +86,10 @@ CREATE TABLE `usuario` (
 -- Volcado de datos para la tabla `usuario`
 --
 
-INSERT INTO `usuario` (`id`, `nombre`, `password`) VALUES
-(9, 'prueba', '$2y$10$JiO08nTlm88HruNGQgQTUup2PndbjiZz0B.bKobjy8XeL2v2tkbN6');
+INSERT INTO `usuario` (`id`, `nombre`, `admin_auth`, `password`) VALUES
+(18, 'dask', 1, '$2y$10$6NcoM.p43KNMSioeuIcAQevNumBcR5XX9YWyWvP59wwQC3qv83UxO'),
+(30, 'prueba 2', 1, '$2y$10$HKA6h/9mJoiDhViGea1VNuN8Sn1/vBBDmUriAZm2A/hpdk1e9eKee'),
+(31, '123123', 0, '$2y$10$vo3H4RMq57XmONTNtKeIcutAxkyxL0sNydCKmiuoRQ4i52gdM2cfe');
 
 --
 -- Índices para tablas volcadas
@@ -126,13 +128,13 @@ ALTER TABLE `categoria`
 -- AUTO_INCREMENT de la tabla `obra`
 --
 ALTER TABLE `obra`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- Restricciones para tablas volcadas

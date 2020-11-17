@@ -28,8 +28,8 @@
 
 
 
-                    {if $sesion}
-                       <h2> {$sesion} </h2>
+                    {if $name neq null}
+                       <h2> {$name} </h2>
                     {else}
                         <svg viewBox="0 0 100 100" class="icon">
                             <path d="M97.5,42.5h-10v-10c0-1.375-1.125-2.5-2.5-2.5h-5c-1.375,0-2.5,1.125-2.5,2.5v10h-10c-1.375,0-2.5,1.125-2.5,2.5v5

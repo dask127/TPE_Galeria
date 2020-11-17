@@ -2,11 +2,8 @@
 {include file="header.tpl"}
 {include file="asideMenu.tpl"}
 
-{if $sesion}
-    {include file="asideRegistrado.tpl"}
-{else}
-    {include file="asideRegistro.tpl"}
-{/if}
+{include file="asideAdmin.tpl"}
+
 
 <div class="abm_container">
     <h2> ¿Que quieres editar? </h2>
@@ -22,6 +19,11 @@
                 Editar categorías
             </a>
         </button>
+        <button class="register_btn">
+        <a href="userabm">
+            Editar usuarios
+        </a>
+    </button>
     </div>
 </div>
 

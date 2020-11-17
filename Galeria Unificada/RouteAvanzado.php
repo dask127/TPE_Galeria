@@ -22,10 +22,10 @@ $r->addRoute("logout", "GET", "LoginController", "Logout");
 //parte de artworks y categories
 $r->addRoute("artworks", "GET", "GalleryController", "Artworks");
 $r->addRoute("categories", "GET", "GalleryController", "Categories");
-$r->addRoute("search", "POST", "GalleryController", "Search");
+$r->addRoute("search", "POST", "GalleryController", "SearchByCategory");
 
 
-//all ABM
+//all about that ABM
 $r->addRoute("abm", "GET", "GalleryController", "ABM");
 
 $r->addRoute("artworkabm", "GET", "GalleryController", "ArtworkABM");
@@ -35,15 +35,22 @@ $r->addRoute("categoryabm", "GET", "GalleryController", "CategoryABM");
 $r->addRoute("addcategory", "POST", "GalleryController", "AddCategoryToDB");
 
 
+$r->addRoute("userabm", "GET", "GalleryController", "UserABM");
+
+
 
 $r->addRoute("artdelete/:ID", "GET", "GalleryController", "DeleteArtwork");
 $r->addRoute("categorydelete/:ID", "GET", "GalleryController", "DeleteCategory");
+$r->addRoute("userdelete/:ID", "GET", "GalleryController", "DeleteUser");
 
+$r->addRoute("useredit/:ID", "GET", "GalleryController", "UserEdit");
 $r->addRoute("artedit/:ID", "GET", "GalleryController", "ArtworkEdit");
-$r->addRoute("addeditedartwork/:ID", "POST", "GalleryController", "AddEditedArtwork");
-
 $r->addRoute("categoryedit/:ID", "GET", "GalleryController", "CategoryEdit");
+
+$r->addRoute("addediteduser/:ID", "POST", "GalleryController", "AddEditedUser");
+$r->addRoute("addeditedartwork/:ID", "POST", "GalleryController", "AddEditedArtwork");
 $r->addRoute("addeditedcategory/:ID", "POST", "GalleryController", "AddEditedCategory");
+
 
 
 $r->addRoute("details/:ID", "GET", "GalleryController", "Details");

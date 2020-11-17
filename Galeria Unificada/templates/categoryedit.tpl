@@ -1,7 +1,16 @@
 {include file="headdeeply.tpl"}
 {include file="header.tpl"}
 {include file="asideMenu.tpl"}
-{include file="asideRegistrado.tpl"}
+
+{if $sesion neq null}
+    {if $sesion eq 1}
+        {include file="asideAdmin.tpl"}
+    {else}
+        {include file="asideUsuario.tpl"}
+    {/if}
+{else}
+    {include file="asideRegistro.tpl"}
+{/if}
 
 <h1> Editar categoría </h1>
 
@@ -15,7 +24,7 @@
                 <input name="nombre" type="text" value="{$categoria->nombre_category}">
             </div>
         </div>
-        
+
         <button class="register_btn_nomargin" type="submit">Terminar edición</button>
     </form>
 </div>
