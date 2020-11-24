@@ -2,6 +2,7 @@
 {include file="header.tpl"}
 {include file="asideMenu.tpl"}
 
+
 {if $sesion neq null}
     {if $sesion eq 1}
         {include file="asideAdmin.tpl"}

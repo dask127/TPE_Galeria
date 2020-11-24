@@ -64,7 +64,6 @@ class GalleryController
         $this->requestSessionInfo();
         $artworks = $this->modelArtwork->GetArtworkAndCategories();
         $categories = $this->modelCategory->GetCategories();
-
         $this->view->ShowArtworkABM($artworks, $categories);
     }
 
@@ -204,7 +203,7 @@ class GalleryController
 
 
             if (!(isset($_POST["imagen"]))) {
-                $imagen = "https://revor.com.ar/wp-content/uploads/2018/04/default-image.png";
+                $imagen = "https://www.dekrs.com/img/image_not_found.png";
             } else $imagen = $_POST["imagen"];
 
 

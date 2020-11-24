@@ -1,5 +1,3 @@
-
-
 let options_btn = document.querySelector("#js-openOptions");
 let register_btn = document.querySelector("#js-userRegister");
 let aside_register = document.querySelector("#js-aside_register");

@@ -1,4 +1,3 @@
-
 {include file="headdeeply.tpl"}
 {include file="header.tpl"}
 {include file="asideMenu.tpl"}
@@ -12,6 +11,8 @@
 {else}
     {include file="asideRegistro.tpl"}
 {/if}
+
+<script src="js/comments.js"></script>
 
 <div class="card__container">
     {* darle estilo LATER *}
@@ -31,7 +32,7 @@
                         </div>
                     </div>
 
-                        <h4> {$obra->nombre_category} </h4>
+                    <h4> {$obra->nombre_category} </h4>
 
                     <h5>{$obra->anio} </h5>
                     <h6>{$obra->descripcion}</h6>
@@ -41,6 +42,10 @@
         </div>
 </div>
 
+<hr class="divider_transparent" />
 
+<div id="comment_section">
+
+</div>
 
 {include file="footer.tpl"}
