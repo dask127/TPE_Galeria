@@ -61,7 +61,15 @@
         </ul>
     </section>
 
+
+
 </li>
 </ul>
+
+<button class="list__subtitle price_box">
+    <a href="feed/0">
+        Ver feed
+    </a>
+</button>
 
 {include file="footer.tpl"}

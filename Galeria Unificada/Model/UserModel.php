@@ -31,9 +31,16 @@ class UserModel
         return $sentencia->fetch(PDO::FETCH_OBJ);
     }
 
-    function getById($user_id)
+    function getAllById($user_id)
     {
         $sentencia = $this->db->prepare("SELECT * FROM usuario WHERE id=?");
+        $sentencia->execute([$user_id]);
+        return $sentencia->fetch(PDO::FETCH_OBJ);
+    }
+
+    function getInfoById($user_id)
+    {
+        $sentencia = $this->db->prepare("SELECT usuario.id, usuario.nombre, usuario.admin_auth FROM usuario WHERE id=?");
         $sentencia->execute([$user_id]);
         return $sentencia->fetch(PDO::FETCH_OBJ);
     }
@@ -48,6 +55,7 @@ class UserModel
     {
         $sentencia = $this->db->prepare("DELETE FROM usuario WHERE id=?");
         $sentencia->execute([$user_id]);
+        return $sentencia->rowCount();
     }
 
     function RegisterUser($username, $hash)

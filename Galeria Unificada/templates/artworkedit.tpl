@@ -1,4 +1,4 @@
-{include file="headdeeply.tpl"}
+{include file="head.tpl"}
 {include file="header.tpl"}
 {include file="asideMenu.tpl"}
 {include file="asideAdmin.tpl"}
@@ -25,7 +25,7 @@
 
             <div class="input_block">
                 <label>Autor:</label>
-                <input name="autor" type="text" value="{$obra->autor}s">
+                <input name="autor" type="text" value="{$obra->autor}">
             </div>
 
             <div class="input_block">
@@ -46,7 +46,7 @@
                 <label>Categoría:</label>
                 <select name="category">
                     {foreach from=$categorias item=categoria}
-                        <option value="{$categoria->id}">{$categoria->nombre}</option>
+                        <option value="{$categoria->id}">{$categoria->nombre_category}</option>
                     {/foreach}
                 </select>
 

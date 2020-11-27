@@ -20,9 +20,20 @@ class CommentModel
 
     function getCommentById($comment_id)
     {
-        $sentencia = $this->db->prepare("SELECT * FROM comentario WHERE comment_id=?");
+        $sentencia = $this->db->prepare("SELECT comentario.*, usuario.nombre FROM comentario JOIN usuario ON comentario.user_comment_id = usuario.id WHERE comment_id=?");
         $sentencia->execute([$comment_id]);
         return $sentencia->fetch(PDO::FETCH_OBJ);
+    }
+
+    function getCommentsIdbyUserId($user_id){
+        $sentencia = $this->db->prepare("SELECT comentario.comment_id FROM comentario WHERE user_comment_id=?");
+        $sentencia->execute([$user_id]);
+        return $sentencia->fetchAll(PDO::FETCH_OBJ);
+    }
+
+    function modifyUserId($comment_id, $new_user_id){
+        $sentencia = $this->db->prepare("UPDATE comentario SET user_comment_id=? WHERE comment_id=?");
+        $sentencia->execute(array($new_user_id, $comment_id));
     }
 
     function DeleteComment($comment_id)

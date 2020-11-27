@@ -8,6 +8,9 @@ class ArtworkModel
     function __construct()
     {
         $this->db = new PDO('mysql:host=localhost;' . 'dbname=db_arte;charset=utf8', 'root', '');
+
+        //al desactivar las preparaciones emuladas, nos permite poner parametros al LIMIT a traves de PDO.
+        $this->db->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
     }
 
     function GetArtworks()
@@ -39,8 +42,8 @@ class ArtworkModel
 
     function GetFrontArtworks($limit)
     {
-        $sentencia = $this->db->prepare("SELECT * FROM obra limit $limit");
-        $sentencia->execute([$limit]);
+        $sentencia = $this->db->prepare("SELECT * FROM obra LIMIT ?");
+        $sentencia->execute(array($limit));
         return $sentencia->fetchAll(PDO::FETCH_OBJ);
     }
 
@@ -66,10 +69,24 @@ class ArtworkModel
         return $sentencia->fetchAll(PDO::FETCH_OBJ);
     }
 
+    function GetRowCount()
+    {
+        $sentencia = $this->db->prepare("SELECT COUNT(*) FROM obra");
+        $sentencia->execute();
+        return $sentencia->fetch(PDO::FETCH_ASSOC);
+    }
+
     function GetArtworkAndCategoryById($obra_id)
     {
         $sentencia = $this->db->prepare("SELECT obra.*, categoria.nombre_category FROM obra JOIN categoria ON obra.id_categoria = categoria.id WHERE obra.id=?");
         $sentencia->execute([$obra_id]);
         return $sentencia->fetch(PDO::FETCH_OBJ);
+    }
+
+    function getBlockOfArtworks($offset, $quantity)
+    {
+        $sentencia = $this->db->prepare("SELECT obra.id, obra.nombre, obra.descripcion, obra.autor, obra.imagen FROM obra ORDER BY id LIMIT ?,?");
+        $sentencia->execute(array($offset, $quantity));
+        return $sentencia->fetchAll(PDO::FETCH_OBJ);
     }
 }

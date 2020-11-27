@@ -3,6 +3,7 @@
 require_once "./View/GalleryView.php";
 require_once "./Model/ArtworkModel.php";
 require_once "./Model/CategoryModel.php";
+require_once "./Model/CommentModel.php";
 
 class GalleryController
 {
@@ -11,6 +12,7 @@ class GalleryController
     private $modelArtwork;
     private $modelCategory;
     private $modelUser;
+    private $modelComment;
 
 
     function __construct()
@@ -20,6 +22,7 @@ class GalleryController
         $this->modelArtwork = new ArtworkModel();
         $this->modelCategory = new CategoryModel();
         $this->modelUser = new UserModel();
+        $this->modelComment = new CommentModel();
     }
 
     // Anotaciones que serviran para entender el codigo en forma global:
@@ -62,6 +65,7 @@ class GalleryController
     {
         $this->loginController->checkPermissions();
         $this->requestSessionInfo();
+
         $artworks = $this->modelArtwork->GetArtworkAndCategories();
         $categories = $this->modelCategory->GetCategories();
         $this->view->ShowArtworkABM($artworks, $categories);
@@ -113,11 +117,11 @@ class GalleryController
             $anio = $_POST["anio"];
             $category = $_POST["category"];
 
-            // La imagen es opcional, si no trae nada le pone una imagen por default
-            if (!(isset($_POST["imagen"]))) {
-                $imagen = "https://fomantic-ui.com/images/wireframe/image.png";
-            } else $imagen = $_POST["imagen"];
-
+            if ($_FILES['input_name']['type'] == "image/jpg" ||  $_FILES['input_name']['type'] == "image/jpeg" || $_FILES['input_name']['type'] == "image/png") {
+                $imagen = $_FILES['input_name']['tmp_name'];
+            } else {
+               $imagen = "algo";
+            }
 
             $this->modelArtwork->AddArtwork($nombre, $descripcion, $autor, $anio, $imagen, $category);
             $this->view->ShowArtworkABMLocation();
@@ -183,7 +187,24 @@ class GalleryController
         $user_id = $params[':ID'];
 
         if (is_numeric($user_id)) {
-            $this->modelUser->DeleteUser($user_id);
+            $affected = $this->modelUser->DeleteUser($user_id);
+
+            //si no afecto a ninguna row, quiere decir que tiene comentarios asociados
+            if ($affected == 0) {
+
+                //agarro todos los id de comentarios que tenga asociados
+                $comentarios = $this->modelComment->getCommentsIdbyUserId($user_id);
+
+
+                foreach ($comentarios as $comentario) {
+                    //por cada uno, le cambio el id de usuario por uno default
+                    $this->modelComment->modifyUserId($comentario->comment_id, 0);
+                }
+
+                //y finalmente lo borra
+                $resultado = $this->modelUser->DeleteUser($user_id);
+            }
+
             $this->view->ShowUserABMLocation();
         }
     }
@@ -277,7 +298,7 @@ class GalleryController
         $user_id = $params[':ID'];
 
         if (is_numeric($user_id)) {
-            $user = $this->modelUser->GetById($user_id);
+            $user = $this->modelUser->GetAllById($user_id);
             $this->view->ShowUserEdit($user);
         }
     }
@@ -310,12 +331,52 @@ class GalleryController
         //asigna a la vista el nombre y la autorizacion del usuario en sesion actualmente
         //para pasarselo al aside;
 
-        //no, no se porque no funca en el login controller
-
         $sessionLevel = $this->loginController->GetSessionAuthLevel();
         $this->view->setSessionLevel($sessionLevel);
 
         $sessionName = $this->loginController->GetSessionUsername();
         $this->view->setSessionName($sessionName);
+    }
+
+    function paginatedArtworks($params = null)
+    {
+        $this->requestSessionInfo();
+
+        //no es una id, pero es el offset que tomo de base
+        $offset_number = $params[':ID'];
+
+        //lo derivo a otra funcion para poder cambiar la cantidad que quiero que se muestren en pantalla
+        // lo pongo por defecto en 3, pero se pueden poner las que quieras
+        $this->startPagination($offset_number, 3);
+    }
+
+    function startPagination($offset, $quantity)
+    {
+        //creo el limite para el LIMIT de sql 
+        $next_offset = $offset + $quantity;
+
+        //compruebo si puedo crear el $back_offset sin que el numero que se crea sea negativo
+        if ($offset > 0) {
+            $back_offset = $offset - $quantity;
+        } else {
+            //le doy esto porque smarty no sabe diferenciar 0 de null.
+            //se lo paso asi para evitar crear el boton cuando no se puede retroceder mas
+            $back_offset = 0.1;
+        }
+
+        //le doy de desde donde ($offset) hasta donde ($limit) me traiga obras
+        $artworks = $this->modelArtwork->getBlockOfArtworks($offset, $quantity);
+
+        //agarrar la cantidad de rows. arranca desde 0
+        $rowcount = $this->modelArtwork->GetRowCount();
+        $rowcount_number = $rowcount["COUNT(*)"];
+
+
+        //si el limite supera o es igual a la cantidad de rows de la db, le doy null para evitar
+        //que se pueda crear el boton de avanzar, ya que no traeria nada de la db
+        if ($next_offset >= $rowcount_number) {
+            $next_offset = null;
+        }
+        $this->view->showPaginatedPage($artworks, $next_offset, $back_offset);
     }
 }

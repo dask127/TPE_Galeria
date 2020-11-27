@@ -33,6 +33,7 @@ class CategoryModel{
     {
         $sentencia = $this->db->prepare("DELETE FROM categoria WHERE id=?");
         $sentencia->execute([$category_id]);
+        return $sentencia->rowCount();
     }
 
     function UpdateCategory($id, $nombre)

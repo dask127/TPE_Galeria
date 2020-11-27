@@ -38,6 +38,8 @@ $r->addRoute("addcategory", "POST", "GalleryController", "AddCategoryToDB");
 $r->addRoute("userabm", "GET", "GalleryController", "UserABM");
 
 
+$r->addRoute("feed/:ID", "GET", "GalleryController", "paginatedArtworks");
+
 
 $r->addRoute("artdelete/:ID", "GET", "GalleryController", "DeleteArtwork");
 $r->addRoute("categorydelete/:ID", "GET", "GalleryController", "DeleteCategory");

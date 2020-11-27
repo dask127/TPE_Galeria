@@ -7,7 +7,6 @@ class APIView {
      */
     public function response($data, $status) {
         header("Content-Type: application/json");
-        header("Authorization: Bearer client-ID 1");
         header("HTTP/1.1 " . $status . " " . $this->requestStatus($status));
         echo json_encode($data);
     }
@@ -21,5 +20,5 @@ class APIView {
         );
         return (isset($status[$code]))? $status[$code] : $status[500];
     }
-  
+
 }

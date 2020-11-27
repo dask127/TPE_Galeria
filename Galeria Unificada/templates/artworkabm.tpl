@@ -4,7 +4,7 @@
 {include file="asideAdmin.tpl"}
 
 <h1> Crear obra </h1>
-<form action="addartwork" method="post">
+<form action="addartwork" method="post" enctype="multipart/form-data">
     <div class="abm_artwork_container">
 
         <div class="input_block">
@@ -28,8 +28,8 @@
         </div>
 
         <div class="input_block">
-            <label>Imagen (link):</label>
-            <input name="imagen" type="url" placeholder="Imagen...">
+            <label>Subir imagen</label>
+            <input name="imagen" type="file" placeholder="Imagen...">
         </div>
 
         <div class="input_block">

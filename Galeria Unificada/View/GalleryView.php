@@ -5,14 +5,16 @@ require_once "./libs/smarty/Smarty.class.php";
 class GalleryView
 {
 
-    private $title;
+    private $css_path;
+    private $css_alternative_path;
     private $sessionLevel;
     private $sessionName;
 
 
     function __construct()
     {
-        $this->title = "Galeria de Arte";
+        $this->css_path = "css/style.css";
+        $this->css_alternative_path = "../css/style.css";
     }
 
     function setSessionLevel($sessionLevel)
@@ -28,7 +30,7 @@ class GalleryView
     function ShowHome($artworks)
     {
         $smarty = new Smarty();
-        $smarty->assign('titulo_s', $this->title);
+        $smarty->assign('css_link', $this->css_path);
         $smarty->assign('sesion', $this->sessionLevel);
         $smarty->assign('name', $this->sessionName);
         $smarty->assign('obras_s', $artworks);
@@ -39,7 +41,7 @@ class GalleryView
     function showAllArtworks($artworks, $categories)
     {
         $smarty = new Smarty();
-        $smarty->assign('titulo_s', $this->title);
+        $smarty->assign('css_link', $this->css_path);
         $smarty->assign('sesion', $this->sessionLevel);
         $smarty->assign('name', $this->sessionName);
 
@@ -53,7 +55,7 @@ class GalleryView
     {
 
         $smarty = new Smarty();
-        $smarty->assign('titulo_s', $this->title);
+        $smarty->assign('css_link', $this->css_path);
         $smarty->assign('sesion', $this->sessionLevel);
         $smarty->assign('name', $this->sessionName);
 
@@ -68,7 +70,7 @@ class GalleryView
     function showAllCategories($categories)
     {
         $smarty = new Smarty();
-        $smarty->assign('titulo_s', $this->title);
+        $smarty->assign('css_link', $this->css_path);
         $smarty->assign('sesion', $this->sessionLevel);
         $smarty->assign('name', $this->sessionName);
         $smarty->assign('categorias', $categories);
@@ -79,7 +81,7 @@ class GalleryView
     function ShowAbout()
     {
         $smarty = new Smarty();
-        $smarty->assign('titulo_s', $this->title);
+        $smarty->assign('css_link', $this->css_path);
         $smarty->assign('sesion', $this->sessionLevel);
         $smarty->assign('name', $this->sessionName);
 
@@ -89,7 +91,7 @@ class GalleryView
     function ShowContact()
     {
         $smarty = new Smarty();
-        $smarty->assign('titulo_s', $this->title);
+        $smarty->assign('css_link', $this->css_path);
         $smarty->assign('sesion', $this->sessionLevel);
         $smarty->assign('name', $this->sessionName);
 
@@ -100,7 +102,7 @@ class GalleryView
     function ShowABM()
     {
         $smarty = new Smarty();
-        $smarty->assign('titulo_s', $this->title);
+        $smarty->assign('css_link', $this->css_path);
         $smarty->assign('sesion', $this->sessionLevel);
         $smarty->assign('name', $this->sessionName);
 
@@ -112,7 +114,7 @@ class GalleryView
 
         $smarty = new Smarty();
         $smarty->assign('obras', $artworks);
-        $smarty->assign('titulo_s', $this->title);
+        $smarty->assign('css_link', $this->css_path);
         $smarty->assign('categorias', $categories);
         $smarty->assign('sesion', $this->sessionLevel);
         $smarty->assign('name', $this->sessionName);
@@ -125,7 +127,7 @@ class GalleryView
     {
         $smarty = new Smarty();
         $smarty->assign('categorias', $categories);
-        $smarty->assign('titulo_s', $this->title);
+        $smarty->assign('css_link', $this->css_path);
         $smarty->assign('sesion', $this->sessionLevel);
         $smarty->assign('name', $this->sessionName);
         $smarty->display('templates/categoryabm.tpl');
@@ -136,7 +138,7 @@ class GalleryView
         $smarty = new Smarty();
         $smarty->assign('usuarios', $users);
         $smarty->assign('sessionName', $logName);
-        $smarty->assign('titulo_s', $this->title);
+        $smarty->assign('css_link', $this->css_path);
         $smarty->assign('sesion', $this->sessionLevel);
         $smarty->assign('name', $this->sessionName);
 
@@ -146,7 +148,7 @@ class GalleryView
     function ShowDetails($artwork)
     {
         $smarty = new Smarty();
-        $smarty->assign('titulo_s', $this->title);
+        $smarty->assign('css_link', $this->css_alternative_path);
         $smarty->assign('sesion', $this->sessionLevel);
         $smarty->assign('name', $this->sessionName);
         $smarty->assign('obra', $artwork);
@@ -159,7 +161,7 @@ class GalleryView
     {
 
         $smarty = new Smarty();
-        $smarty->assign('titulo_s', $this->title);
+        $smarty->assign('css_link', $this->css_alternative_path);
         $smarty->assign('obra', $artwork);
         $smarty->assign('sesion', $this->sessionLevel);
         $smarty->assign('name', $this->sessionName);
@@ -171,7 +173,7 @@ class GalleryView
     function ShowCategoryEdit($category)
     {
         $smarty = new Smarty();
-        $smarty->assign('titulo_s', $this->title);
+        $smarty->assign('css_link', $this->css_alternative_path);
         $smarty->assign('categoria', $category);
         $smarty->assign('sesion', $this->sessionLevel);
         $smarty->assign('name', $this->sessionName);
@@ -182,7 +184,7 @@ class GalleryView
     function ShowUserEdit($user)
     {
         $smarty = new Smarty();
-        $smarty->assign('titulo_s', $this->title);
+        $smarty->assign('css_link', $this->css_alternative_path);
         $smarty->assign('usuario', $user);
         $smarty->assign('sesion', $this->sessionLevel);
         $smarty->assign('name', $this->sessionName);
@@ -198,12 +200,26 @@ class GalleryView
         }
 
         $smarty = new Smarty();
-        $smarty->assign('titulo_s', $this->title);
+        $smarty->assign('css_link', $this->css_path);
         $smarty->assign('sesion', $this->sessionLevel);
         $smarty->assign('name', $this->sessionName);
         $smarty->assign("error", $error);
 
         $smarty->display('templates/login.tpl');
+    }
+
+    function showPaginatedPage($artworks, $next_offset, $back_offset)
+    {
+        $smarty = new Smarty();
+        $smarty->assign('css_link', $this->css_alternative_path);
+        $smarty->assign('sesion', $this->sessionLevel);
+        $smarty->assign('name', $this->sessionName);
+        $smarty->assign('obras', $artworks);
+        $smarty->assign('back_button', $back_offset);
+        $smarty->assign('next_button', $next_offset);
+
+
+        $smarty->display('templates/paginatedArtworks.tpl');
     }
 
     function ShowHomeLocation()

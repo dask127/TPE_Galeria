@@ -1,4 +1,4 @@
-{include file="headdeeply.tpl"}
+{include file="head.tpl"}
 {include file="header.tpl"}
 {include file="asideMenu.tpl"}
 
@@ -42,10 +42,17 @@
         </div>
 </div>
 
+
+
+<div id="comment_input_container">
+
+</div>
+
 <hr class="divider_transparent" />
 
 <div id="comment_section">
-
+    <ul id="comment_list">
+    </ul>
 </div>
 
 {include file="footer.tpl"}
