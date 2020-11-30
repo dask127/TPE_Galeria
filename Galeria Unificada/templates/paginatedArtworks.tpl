@@ -56,7 +56,7 @@
     {if $next_button neq null}
         <button class="register_btn">
             <a href="feed/{$next_button}">
-                Siguiente Página
+                Siguiente
             </a>
         </button>
     {/if}

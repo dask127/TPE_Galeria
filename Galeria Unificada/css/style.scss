@@ -536,6 +536,7 @@ select {
 .list__title {
     font-size: 2em;
     text-align: center;
+    margin-bottom: 5%;
 }
 
 .list__subtitle {
@@ -581,6 +582,11 @@ select {
         border-radius: 8px;
         padding: 0 2%;
     }
+}
+
+.aligned {
+    margin:auto;
+    text-align: center;
 }
 
 .a__card__style {

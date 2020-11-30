@@ -17,7 +17,7 @@
     <form action="addcategory" method="post">
 
         <div class="input_container">
-        
+
             <div class="input_block">
                 <label>Nombre:</label>
                 <input name="nombre" type="text" placeholder="Nombre...">
@@ -27,6 +27,10 @@
         </div>
     </form>
 </div>
+
+{if $message neq null}
+    <h4 class="error aligned"> {$message} </h4>
+{/if}
 
 
 <article class="artworks_container">

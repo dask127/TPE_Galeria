@@ -1,6 +1,5 @@
 
 <body>
-    <script src="js/recientes.js"></script>
 
     <header class="header__up sticky">
         <nav class="header__up_nav">

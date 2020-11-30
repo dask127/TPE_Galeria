@@ -17,15 +17,24 @@
 
 
 
-<li class="recent content_centered" id="cosa">
+<li class="recent content_centered">
     <hr class="divider">
 
-    <h1 class="list__title">Obras Recientes</h1>
-    <h2 class="list__subtitle price_box">
-        <a href="artworks">
-            Ver todas
-        </a>
-    </h2>
+    <h1 class="list__title">Obras</h1>
+
+    <div class="feed_buttons">
+        <button class="register_btn">
+            <a href="artworks">
+                Ver en tabla
+            </a>
+        </button>
+
+        <button class="register_btn">
+            <a href="feed/0">
+                Ver en manera paginada
+            </a>
+        </button>
+    </div>
 
     <hr class="divider_transparent">
 
@@ -66,10 +75,6 @@
 </li>
 </ul>
 
-<button class="list__subtitle price_box">
-    <a href="feed/0">
-        Ver feed
-    </a>
-</button>
+
 
 {include file="footer.tpl"}

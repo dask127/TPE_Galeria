@@ -9,7 +9,8 @@ class ArtworkModel
     {
         $this->db = new PDO('mysql:host=localhost;' . 'dbname=db_arte;charset=utf8', 'root', '');
 
-        //al desactivar las preparaciones emuladas, nos permite poner parametros al LIMIT a traves de PDO.
+        //al desactivar las preparaciones emuladas, nos permite poner parametros al LIMIT a través de PDO.
+        //se puede ver esto en las funciones: getBlockOfArtworks y GetFrontArtworks
         $this->db->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
     }
 
@@ -36,8 +37,14 @@ class ArtworkModel
 
     function AddArtwork($nombre, $descripcion, $autor, $anio, $imagen, $category)
     {
+        //si está seteada, quiere decir que hay una imagen en la carpeta temporal de php.
+        //si no lo está, entonces estoy colocando una foto por default y no me importa el "fileTemp", solo el "filePath".
+        if (isset($imagen["fileTemp"])) {
+            move_uploaded_file($imagen["fileTemp"], $imagen["filePath"]);
+        }
+
         $sentencia = $this->db->prepare("INSERT INTO obra(nombre, descripcion, autor, anio,imagen,id_categoria) VALUES(?,?,?,?,?,?)");
-        $sentencia->execute(array($nombre, $descripcion, $autor, $anio, $imagen, $category));
+        $sentencia->execute(array($nombre, $descripcion, $autor, $anio, $imagen["filePath"], $category));
     }
 
     function GetFrontArtworks($limit)
@@ -56,10 +63,13 @@ class ArtworkModel
 
     function UpdateArtwork($nombre, $descripcion, $autor, $anio, $imagen, $category, $art_id)
     {
-        $sentencia = $this->db->prepare("UPDATE obra
-        SET nombre=?, descripcion=?, autor=?, anio=?, imagen=?, id_categoria=? 
-        WHERE id=?");
-        $sentencia->execute(array($nombre, $descripcion, $autor, $anio, $imagen, $category, $art_id));
+
+        if (isset($imagen["fileTemp"])) {
+            move_uploaded_file($imagen["fileTemp"], $imagen["filePath"]);
+        }
+
+        $sentencia = $this->db->prepare("UPDATE obra SET nombre=?, descripcion=?, autor=?, anio=?, imagen=?, id_categoria=? WHERE id=?");
+        $sentencia->execute(array($nombre, $descripcion, $autor, $anio, $imagen["filePath"], $category, $art_id));
     }
 
     function GetArtworkAndCategories()

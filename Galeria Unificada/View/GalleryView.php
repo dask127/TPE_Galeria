@@ -123,13 +123,21 @@ class GalleryView
     }
 
 
-    function ShowCategoryABM($categories)
+    function ShowCategoryABM($categories, $message)
     {
+
         $smarty = new Smarty();
+
+        //si me traigo algo en el mensaje es porque hay un error, por lo tanto, el css
+        //no alcanzaria la pagina.
+        if ($message != null) {
+            $smarty->assign('css_link', $this->css_alternative_path);
+        } else $smarty->assign('css_link', $this->css_path);
+
         $smarty->assign('categorias', $categories);
-        $smarty->assign('css_link', $this->css_path);
         $smarty->assign('sesion', $this->sessionLevel);
         $smarty->assign('name', $this->sessionName);
+        $smarty->assign('message', $message);
         $smarty->display('templates/categoryabm.tpl');
     }
 

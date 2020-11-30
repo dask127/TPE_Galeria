@@ -6,7 +6,7 @@
 <h1> Editar obra </h1>
 
 <div class="abm_edit_container">
-    <form action="addeditedartwork/{$obra->id}" method="post">
+    <form action="addeditedartwork/{$obra->id}" method="post" enctype="multipart/form-data">
 
         <div class="abm_edit_row">
 
@@ -38,8 +38,11 @@
 
             <div class="input_block">
 
-                <label>Imagen (link):</label>
-                <input name="imagen" type="url" value="{$obra->imagen}">
+                <label>Imagen </label>
+                <input name="imagen" type="file">
+
+                <label>URL </label>
+                <input name="imagen_url" type="text" value="{$obra->imagen}">
             </div>
 
             <div class="input_block">

@@ -71,13 +71,18 @@ class GalleryController
         $this->view->ShowArtworkABM($artworks, $categories);
     }
 
-    function CategoryABM()
+    function CategoryABM($params = null)
     {
+
+        if ($params == null) {
+            $message = null;
+        } else $message = $params;
+
         $this->loginController->checkPermissions();
         $this->requestSessionInfo();
         $categories = $this->modelCategory->GetCategories();
 
-        $this->view->ShowCategoryABM($categories);
+        $this->view->ShowCategoryABM($categories, $message);
     }
 
     function UserABM()
@@ -117,11 +122,25 @@ class GalleryController
             $anio = $_POST["anio"];
             $category = $_POST["category"];
 
-            if ($_FILES['input_name']['type'] == "image/jpg" ||  $_FILES['input_name']['type'] == "image/jpeg" || $_FILES['input_name']['type'] == "image/png") {
-                $imagen = $_FILES['input_name']['tmp_name'];
-            } else {
-               $imagen = "algo";
-            }
+            if (isset($_FILES)) {
+                if ($_FILES['imagen']['type'] == "image/jpg" ||  $_FILES['imagen']['type'] == "image/jpeg" || $_FILES['imagen']['type'] == "image/png") {
+
+                    //si la imagen tiene el formato aceptado, guardo 2 cosas en un array para pasarle al model:
+
+                    //1) la ubicacion de la imagen cuando recien está subida y está en formato .temp ("fileTemp").
+
+                    //2) el lugar donde quiero guardar la imagen. consiste de: la carpeta donde la quiero guardar,
+                    // un nombre unico (uniqid) y la extension de la imagen. agrupo todo esto en un string.
+
+                    $imagen["fileTemp"] = $_FILES['imagen']['tmp_name'];
+                    $imagen["filePath"] = "temp/" . uniqid("", true) . "." . strtolower(pathinfo($_FILES['imagen']['name'], PATHINFO_EXTENSION));
+                } else {
+
+                    //si quiso subir una imagen pero no era compatible, le doy una por default que tengo en la carpeta /temp.
+                    $imagen["filePath"] = "temp/image-placeholder.png";
+                }
+                //si o si necesito darle una imagen por default
+            } else $imagen["filePath"] = "temp/image-placeholder.png";
 
             $this->modelArtwork->AddArtwork($nombre, $descripcion, $autor, $anio, $imagen, $category);
             $this->view->ShowArtworkABMLocation();
@@ -174,11 +193,18 @@ class GalleryController
 
     function DeleteCategory($params = null)
     {
+        $this->loginController->checkPermissions();
+        $this->requestSessionInfo();
+        
         $category_id = $params[':ID'];
 
         if (is_numeric($category_id)) {
-            $this->modelCategory->DeleteCategory($category_id);
-            $this->view->ShowCategoryABMLocation();
+            $result = $this->modelCategory->DeleteCategory($category_id);
+
+            if ($result == 0) {
+                $categories = $this->modelCategory->GetCategories();
+                $this->view->ShowCategoryABM($categories, "Esta categoria tiene articulos asociados.");
+            } else  $this->view->ShowCategoryABMLocation();
         }
     }
 
@@ -214,19 +240,33 @@ class GalleryController
     function AddEditedArtwork($params = null)
     {
 
-        if ((isset($_POST["nombre"])) && (isset($_POST["descripcion"])) && (isset($_POST["autor"])) && (isset($_POST["anio"])) && (isset($_POST["category"]))) {
+        if ((isset($_POST["nombre"])) && (isset($_POST["imagen_url"])) && (isset($_POST["descripcion"])) && (isset($_POST["autor"])) && (isset($_POST["anio"])) && (isset($_POST["category"]))) {
 
             $nombre = $_POST["nombre"];
             $descripcion = $_POST["descripcion"];
             $autor = $_POST["autor"];
             $anio = $_POST["anio"];
             $category = $_POST["category"];
+            $imagen_url = $_POST["imagen_url"];
 
+            if (isset($_FILES)) {
+                if ($_FILES['imagen']['type'] == "image/jpg" ||  $_FILES['imagen']['type'] == "image/jpeg" || $_FILES['imagen']['type'] == "image/png") {
 
-            if (!(isset($_POST["imagen"]))) {
-                $imagen = "https://www.dekrs.com/img/image_not_found.png";
-            } else $imagen = $_POST["imagen"];
+                    //si la imagen tiene el formato aceptado, guardo 2 cosas en un array para pasarle al model:
 
+                    //1) la ubicacion de la imagen cuando recien está subida y está en formato .temp ("fileTemp").
+
+                    //2) el lugar donde quiero guardar la imagen. consiste de: la carpeta donde la quiero guardar,
+                    // un nombre unico (uniqid) y la extension de la imagen. agrupo todo esto en un string.
+
+                    $imagen["fileTemp"] = $_FILES['imagen']['tmp_name'];
+                    $imagen["filePath"] = "temp/" . uniqid("", true) . "." . strtolower(pathinfo($_FILES['imagen']['name'], PATHINFO_EXTENSION));
+                } else {
+
+                    //si quiso subir una imagen pero no era compatible, le doy le que ya tenia.
+                    $imagen["filePath"] =  $imagen_url;
+                }
+            } else $imagen["filePath"] = $imagen_url;
 
             $obra_id = $params[':ID'];
 
