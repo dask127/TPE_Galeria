@@ -186,8 +186,18 @@ class GalleryController
 
         //compruebo que sea un numero 
         if (is_numeric($obra_id)) {
-            $this->modelArtwork->DeleteArtwork($obra_id);
-            $this->view->ShowArtworkABMLocation();
+            $resultado = $this->modelArtwork->DeleteArtwork($obra_id);
+
+            if ($resultado > 0) {
+                $this->view->ShowArtworkABMLocation();
+            } else {
+                $return = $this->modelComment->DeleteCommentByArtId($obra_id);
+                
+                if ($return > 0) {
+                    $resultado = $this->modelArtwork->DeleteArtwork($obra_id);
+                    $this->view->ShowArtworkABMLocation();
+                }
+            }
         }
     }
 
@@ -195,7 +205,7 @@ class GalleryController
     {
         $this->loginController->checkPermissions();
         $this->requestSessionInfo();
-        
+
         $category_id = $params[':ID'];
 
         if (is_numeric($category_id)) {
@@ -263,8 +273,11 @@ class GalleryController
                     $imagen["filePath"] = "temp/" . uniqid("", true) . "." . strtolower(pathinfo($_FILES['imagen']['name'], PATHINFO_EXTENSION));
                 } else {
 
-                    //si quiso subir una imagen pero no era compatible, le doy le que ya tenia.
-                    $imagen["filePath"] =  $imagen_url;
+                    if ($imagen_url == null) {
+                        $imagen["filePath"] = "temp/image-placeholder.png";
+
+                        //si quiso subir una imagen pero no era compatible, le doy le que ya tenia.
+                    } else $imagen["filePath"] =  $imagen_url;
                 }
             } else $imagen["filePath"] = $imagen_url;
 

@@ -58,6 +58,7 @@ class ArtworkModel
     {
         $sentencia = $this->db->prepare("DELETE FROM obra WHERE id=?");
         $sentencia->execute([$art_id]);
+        return $sentencia->rowCount();
     }
 
 

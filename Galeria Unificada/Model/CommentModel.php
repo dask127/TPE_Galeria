@@ -43,6 +43,13 @@ class CommentModel
         return $sentencia->rowCount();
     }
 
+    function DeleteCommentByArtId($art_id)
+    {
+        $sentencia = $this->db->prepare("DELETE FROM comentario WHERE artwork_id=?");
+        $sentencia->execute([$art_id]);
+        return $sentencia->rowCount();
+    }
+
     function InsertComment($text, $rating, $artwork_id, $user_id)
     {
         $sentencia = $this->db->prepare("INSERT INTO comentario(text, rating, artwork_id, user_comment_id) VALUES(?,?,?,?)");
